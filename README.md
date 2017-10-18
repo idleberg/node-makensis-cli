@@ -105,7 +105,7 @@ $ makensis-cli version --json --wine
 ```
 ____
 
-Let's generate a demo script we can use
+Let's generate a demo script we can use in the following steps
 
 ```sh
 $ printf "OutFile demo.exe\n\nSection\n!warning\nSectionEnd" > demo.nsi
