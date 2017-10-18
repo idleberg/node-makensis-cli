@@ -1,0 +1,36 @@
+{
+  "name": "makensis-cli",
+  "version": "0.0.0",
+  "description": "CLI for the makensis wrapper on Node, compiles NSIS scripts",
+  "main": "bin/cli.js",
+  "files": [
+    "dist/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idleberg/node-makensis-cli.git"
+  },
+  "keywords": [
+    "nsis",
+    "makensis",
+    "cli"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.11.0",
+    "makensis": "^0.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.26",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-debug": "^3.1.0",
+    "gulp-jsonlint": "^1.2.0",
+    "gulp-tslint": "^8.1.2",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
+  },
+  "scripts": {
+    "build": "tsc -p ./",
+    "prepublish": "gulp lint && npm run build"
+  }
+}
