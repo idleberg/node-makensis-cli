@@ -86,6 +86,7 @@ Display makensis version
 $ makensis-cli version
 
 # Result:
+#
 # v3.02.1
 ```
 ____
@@ -96,6 +97,7 @@ Display makensis version as JSON
 $ makensis-cli version --json
 
 # Result:
+#
 # {
 #   "version": "3.02.1"
 # }
@@ -108,6 +110,7 @@ Display makensis version on Wine as JSON
 $ makensis-cli version --json --wine
 
 # Result:
+#
 # {
 #   "version": "3.01"
 # }
@@ -127,6 +130,7 @@ Compile script
 $ makensis-cli compile demo.nsi
 
 # Result (omitted):
+#
 # EXE header size:               36352 / 37888 bytes
 # Install code:                    399 / 1999 bytes
 # Install data:                      0 / 0 bytes
@@ -143,6 +147,7 @@ Compile script at verbosity level 2
 $ makensis-cli compile demo.nsi --verbose 2
 
 # Result:
+#
 # warning: !warning:  (demo.nsi:4)1 warning:
 #   !warning:  (demo.nsi:4)
 ```
@@ -154,6 +159,7 @@ Compile script at verbosity level 2 with strict settings
 $ makensis-cli compile demo.nsi --verbose 2 --strict
 
 # Result:
+#
 # Exit Code 1
 # Error: warning treated as error
 ```
@@ -165,6 +171,7 @@ Compile script at verbosity level 2 with strict settings, output JSON
 $ makensis-cli compile demo.nsi --verbose 2 --strict --json
 
 # Result:
+#
 # {
 #   "status": 1,
 #   "stdout": "warning: !warning:  (demo.nsi:4)",
