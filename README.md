@@ -71,60 +71,89 @@ Options:
 
 **Examples:**
 
+Display makensis version
+
 ```sh
-# Display makensis version
 $ makensis-cli version
 
-v3.02.1
+# Result:
+# v3.02.1
+```
 
-# Display makensis version as JSON
+Display makensis version as JSON
+
+```sh
 $ makensis-cli version --json
 
-{
-  "version": "3.02.1"
-}
+# Result:
+# {
+#   "version": "3.02.1"
+# }
+```
 
-# Display makensis version on Wine as JSON
+Display makensis version on Wine as JSON
+
+```sh
 $ makensis-cli version --json --wine
 
-{
-  "version": "3.01"
-}
+# Result:
+# {
+#   "version": "3.01"
+# }
+```
 
-# Generate demo script
+Let's generate a demo script we can use
+
+```sh
 $ printf "OutFile demo.exe\n\nSection\n!warning\nSectionEnd" > demo.nsi
+```
 
-# Compile script
+Compile script
+
+```sh
 $ makensis-cli compile demo.nsi
 
-EXE header size:               36352 / 37888 bytes
-Install code:                    399 / 1999 bytes
-Install data:                      0 / 0 bytes
-CRC (0x027F605B):                  4 / 4 bytes
-Total size:                    36755 / 39891 bytes (92.1%)
-1 warning:
-  !warning:  (demo.nsi:4)
+# Result:
+# EXE header size:               36352 / 37888 bytes
+# Install code:                    399 / 1999 bytes
+# Install data:                      0 / 0 bytes
+# CRC (0x027F605B):                  4 / 4 bytes
+# Total size:                    36755 / 39891 bytes (92.1%)
+# 1 warning:
+#   !warning:  (demo.nsi:4)
+```
 
-# Compile script at verbosity level 2
+Compile script at verbosity level 2
+
+```sh
 $ makensis-cli compile demo.nsi --verbose 2
 
-warning: !warning:  (demo.nsi:4)1 warning:
-  !warning:  (demo.nsi:4)
+# Result:
+# warning: !warning:  (demo.nsi:4)1 warning:
+#   !warning:  (demo.nsi:4)
+```
 
-# Compile script at verbosity level 2 with strict settings
+Compile script at verbosity level 2 with strict settings
+
+```sh
 $ makensis-cli compile demo.nsi --verbose 2 --strict
 
-Exit Code 1
-Error: warning treated as error
+# Result:
+# Exit Code 1
+# Error: warning treated as error
+```
 
-# Compile script at verbosity level 2 with strict settings, output JSON
+Compile script at verbosity level 2 with strict settings, output JSON
+
+```sh
 $ makensis-cli compile demo.nsi --verbose 2 --strict --json
 
-{
-  "status": 1,
-  "stdout": "warning: !warning:  (demo.nsi:4)",
-  "stderr": "Error: warning treated as error"
-}
+# Result:
+# {
+#   "status": 1,
+#   "stdout": "warning: !warning:  (demo.nsi:4)",
+#   "stderr": "Error: warning treated as error"
+# }
 ```
 ## License
 
