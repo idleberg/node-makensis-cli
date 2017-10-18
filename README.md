@@ -79,6 +79,7 @@ $ makensis-cli version
 # Result:
 # v3.02.1
 ```
+____
 
 Display makensis version as JSON
 
@@ -90,6 +91,7 @@ $ makensis-cli version --json
 #   "version": "3.02.1"
 # }
 ```
+____
 
 Display makensis version on Wine as JSON
 
@@ -101,12 +103,14 @@ $ makensis-cli version --json --wine
 #   "version": "3.01"
 # }
 ```
+____
 
 Let's generate a demo script we can use
 
 ```sh
 $ printf "OutFile demo.exe\n\nSection\n!warning\nSectionEnd" > demo.nsi
 ```
+____
 
 Compile script
 
@@ -122,6 +126,7 @@ $ makensis-cli compile demo.nsi
 # 1 warning:
 #   !warning:  (demo.nsi:4)
 ```
+____
 
 Compile script at verbosity level 2
 
@@ -132,6 +137,7 @@ $ makensis-cli compile demo.nsi --verbose 2
 # warning: !warning:  (demo.nsi:4)1 warning:
 #   !warning:  (demo.nsi:4)
 ```
+____
 
 Compile script at verbosity level 2 with strict settings
 
@@ -142,6 +148,7 @@ $ makensis-cli compile demo.nsi --verbose 2 --strict
 # Exit Code 1
 # Error: warning treated as error
 ```
+____
 
 Compile script at verbosity level 2 with strict settings, output JSON
 
