@@ -62,7 +62,7 @@ Alternatively, you can setup NSIS in your [Wine](http://winehq.org/) environment
 Running `makensis-cli help` lists all available options:
 
 ```
-Usage: makensis-cli <cmd> [file.nsi] [options]
+Usage: makensis-cli <command> [file.nsi] [options]
 
 Options:
 
