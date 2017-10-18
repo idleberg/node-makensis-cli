@@ -52,10 +52,10 @@ Alternatively, you can setup NSIS in your [Wine](http://winehq.org/) environment
 
 ### Commands
 
-- `compile|build|make` – equivalent of `makensis <file.nsi>`
-- `hdrinfo|flags|info` – equivalent of `makensis -HDRINFO`
-- `version` – equivalent of `makensis -VERSION`
-- `cmdhelp|help` – equivalent of `makensis -CMDHELP [command]`
+- `compile` – equivalent of `makensis <file.nsi>` (Aliases: `c|build|make` )
+- `hdrinfo` – equivalent of `makensis -HDRINFO` (Aliases: `f|flags|i|info`)
+- `version` – equivalent of `makensis -VERSION` (Alias: `v`)
+- `cmdhelp` – equivalent of `makensis -CMDHELP [command]` (Aliases: `h|help`)
 
 ### Options
 

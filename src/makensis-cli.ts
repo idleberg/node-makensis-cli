@@ -57,9 +57,10 @@ program
       case 'make':
         compile(filePath, options);
         break;
-      case 'h':
+      case 'f':
       case 'flags':
       case 'hdrinfo':
+      case 'i':
       case 'info':
         hdrinfo(options);
         break;
