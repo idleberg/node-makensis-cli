@@ -126,7 +126,7 @@ Compile script
 ```sh
 $ makensis-cli compile demo.nsi
 
-# Result:
+# Result (omitted):
 # EXE header size:               36352 / 37888 bytes
 # Install code:                    399 / 1999 bytes
 # Install data:                      0 / 0 bytes
