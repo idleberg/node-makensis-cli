@@ -13,8 +13,8 @@ var validCharsets = [
 program
     .version(meta.version)
     .description('CLI version of node-makensis')
-    .arguments('<cmd> [file.nsi]>')
-    .usage('<cmd> [file.nsi] [options]')
+    .arguments('<command> [file.nsi]>')
+    .usage('<command> [file.nsi] [options]')
     .option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16[LE|BE]')
     .option('-j, --json', 'print hdrinfo as JSON')
     .option('-p, --pause', 'pauses after execution')
@@ -54,9 +54,10 @@ program
         case 'make':
             util_1.compile(filePath, options);
             break;
-        case 'h':
+        case 'f':
         case 'flags':
         case 'hdrinfo':
+        case 'i':
         case 'info':
             util_1.hdrinfo(options);
             break;
