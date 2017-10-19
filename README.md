@@ -150,7 +150,8 @@ $ makensis-cli compile demo.nsi --verbose 2
 
 # Result:
 #
-# warning: !warning:  (demo.nsi:4)1 warning:
+# warning: !warning:  (demo.nsi:4)
+# 1 warning:
 #   !warning:  (demo.nsi:4)
 ```
 ____
