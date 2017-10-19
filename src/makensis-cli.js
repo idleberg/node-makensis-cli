@@ -1,4 +1,6 @@
-import * as program from 'commander';
+#!/usr/bin/env node
+
+const program = require('commander');
 import { compile, hdrinfo, cmdhelp, version } from './util';
 const meta = require('../package.json');
 
@@ -16,16 +18,17 @@ program
   .arguments('<command> [file.nsi]>')
   .usage('<command> [file.nsi] [options]')
   .option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16[LE|BE]')
-  .option('-j, --json', 'print hdrinfo as JSON')
+  .option('-j, --json', 'prints output as JSON')
   .option('-p, --pause', 'pauses after execution')
   .option('-P, --ppo', 'preprocess to stdout/file')
   .option('-S, --safe-ppo', 'preprocess to stdout/file')
   .option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt)
   .option('-w, --wine', 'use Wine to run makenis')
   .option('-x, --strict', 'treat warnings as errors')
+  .option('-y, --yaml', 'prints output as YAML')
   .action(function(cmd, filePath, flags) {
 
-    let inputCharset: any = (typeof flags.inputCharset !== 'undefined' && (validCharsets.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null)) ? flags.inputCharset : '';
+    let inputCharset = (typeof flags.inputCharset !== 'undefined' && (validCharsets.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null)) ? flags.inputCharset : '';
     let noCD = (typeof flags.nocd === 'undefined') ? false : true;
     let noConfig = (typeof flags.noconfig === 'undefined') ? false : true;
     let pause = (typeof flags.pause === 'undefined') ? false : true;
@@ -35,6 +38,14 @@ program
     let strict = (typeof flags.strict === 'undefined') ? false : true;
     let verbose = (flags.verbose >= 0 && flags.verbose <= 4) ? flags.verbose : null;
     let wine = (typeof flags.wine === 'undefined') ? false : true;
+    let yaml = (typeof flags.yaml === 'undefined') ? false : true;
+
+    let target = null;
+    if (yaml === true && json === false) {
+      target = 'yaml'
+    } else if (json === true && yaml === false) {
+      target = 'json'
+    }
 
     const options = {
       'inputCharset': inputCharset,
@@ -45,8 +56,10 @@ program
       'ppo': ppo,
       'safePPO': safePPO,
       'strict': strict,
+      'target': target,
       'verbose': verbose,
-      'wine': wine
+      'wine': wine,
+      'yaml': yaml
     };
 
     switch (cmd) {

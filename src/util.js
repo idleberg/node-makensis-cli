@@ -1,78 +1,69 @@
 import * as makensis from 'makensis';
+const YAML = require('yamljs');
 
-interface CompilerOptions {
-  inputCharset?: string;
-  json?: boolean;
-  nocd?: boolean;
-  noconfig?: boolean;
-  pause?: boolean;
-  ppo?: boolean;
-  safeppo?: boolean;
-  strict?: boolean;
-  verbose?: number;
-  wine?: boolean;
-}
-
-
-const compile = (filePath: string, options: CompilerOptions = null) => {
+const compile = (filePath, options = null) => {
   options || (options = {});
 
   makensis.compile(filePath, options)
   .then(output => {
-    if (options.json === true) {
-      jsonString(output);
+    if (options.target !== null) {
+      printString(output, options.target);
+    } else if (options.yaml === true) {
+      printString(output, options.target);
     } else {
       console.log(output.stdout);
     }
   }).catch(output => {
-    if (options.json === true) {
-      jsonString(output);
+    if (options.target !== null) {
+      printString(output, options.target);
+    } else if (options.yaml === true) {
+      printString(output, options.target);
     } else {
       console.error(`Exit Code ${output.status}\n${output.stderr}`);
     }
   });
 };
 
-const hdrinfo = (options: CompilerOptions = null) => {
+const hdrinfo = (options = null) => {
   options || (options = {});
 
   makensis.hdrInfo()
   .then(output => {
     // due to an error in makensis, this code should never run
-    if (options.json === true) {
-      jsonFlags(output.stdout);
+    if (options.target !== null) {
+      printFlags(output.stdout, options.target);
     } else {
       console.log(output.stdout);
     }
   }).catch(output => {
-    if (options.json === true) {
-      jsonFlags(output.stdout);
+    if (options.target !== null) {
+      printFlags(output.stdout, options.target);
     } else {
       console.log(output.stdout);
     }
   });
 };
 
-const version = (options: CompilerOptions = null) => {
+const version = (options = null) => {
   options || (options = {});
 
   makensis.version(options)
   .then(output => {
-    if (options.json === true) {
-      jsonString(output.stdout, 'version');
+    if (options.target !== null) {
+      printString(output.stdout, options.target, 'version');
     } else {
       console.log(output.stdout);
     }
   }).catch(output => {
-    if (options.json === true) {
-      jsonString(output.stderr, 'error');
+    if (options.target !== null) {
+      printString(output.stderr, options.target, 'error');
     } else {
       console.error(output.stderr);
     }
   });
 };
 
-const cmdhelp = (title: string = '', options: CompilerOptions = null) => {
+const cmdhelp = (title = '', options = null) => {
   options || (options = {});
 
   makensis.cmdHelp(title, options)
@@ -80,15 +71,15 @@ const cmdhelp = (title: string = '', options: CompilerOptions = null) => {
     // due to an error in makensis, this code should never run
     return;
   }).catch(output => {
-    if (options.json === true) {
-      jsonString(output.stderr, 'help');
+    if (options.target !== null) {
+      printString(output.stderr, options.target, 'help');
     } else {
       console.error(output.stderr);
     }
   });
 };
 
-const jsonString = (input: string, key = null) => {
+const printString = (input, target = 'json', key = null) => {
   let obj = {};
 
   if (key === 'version' && input.startsWith('v')) {
@@ -100,12 +91,17 @@ const jsonString = (input: string, key = null) => {
     obj[key] = input;
   }
 
-  let json = JSON.stringify(obj, null, '  ');
+  let output;
+  if (target === 'yaml') {
+    output = YAML.stringify(obj);
+  } else {
+    output = JSON.stringify(obj, null, '  ');
+  }
 
-  console.log(json);
+  console.log(output);
 };
 
-const jsonFlags = (input: string) => {
+const printFlags = (input, target = 'json') => {
   let lines = input.split('\n');
 
   let filteredLines = lines.filter((line) => {
@@ -124,9 +120,9 @@ const jsonFlags = (input: string) => {
   let symbols = lineData.split(',');
   // console.log(symbols);
 
-  let table: any = [];
-  let tableSizes: any = [];
-  let tableSymbols: any = [];
+  let table = {};
+  let tableSizes = {};
+  let tableSymbols = {};
 
   // Split sizes
   filteredLines.forEach((line) => {
@@ -136,17 +132,17 @@ const jsonFlags = (input: string) => {
     pair[1] = pair[1].substring(-1, pair[1].length - 1);
 
     let obj = {};
-    obj[pair[0]] = pair[1];
-    tableSizes.push(pair);
+    tableSizes[pair[0]] = pair[1];
+    // tableSizes.push(pair);
   });
 
   let objSizes = {};
-  objSizes['sizes'] = tableSizes;
-  table.push(objSizes);
+  table['sizes'] = tableSizes;
+  // table.push(objSizes);
 
   // Split symbols
   symbols.forEach((symbol) => {
-    let pair: Array<any> = symbol.split('=');
+    let pair = symbol.split('=');
     let obj = {};
 
     if (pair.length > 1) {
@@ -154,17 +150,15 @@ const jsonFlags = (input: string) => {
         pair[1] = parseInt(pair[1], 10);
       }
 
-      obj[pair[0]] = pair[1];
+      tableSymbols[pair[0]] = pair[1];
     } else {
-      obj[symbol] = true;
+      tableSymbols[symbol] = true;
     }
-
-    tableSymbols.push(obj);
   });
 
   let obj = {};
-  obj['defined_symbols'] = tableSymbols;
-  table.push(obj);
+  table['defined_symbols'] = tableSymbols;
+  // table.push(obj);
 
   const config = {
     columns: {
@@ -179,8 +173,14 @@ const jsonFlags = (input: string) => {
     }
   };
 
-  const json = JSON.stringify(table, null, '  ');
-  console.log(json);
+  let output;
+  if (target === 'yaml') {
+    output = YAML.stringify(table);
+  } else {
+    output = JSON.stringify(table, null, '  ');
+  }
+
+  console.log(output);
 };
 
 const isInteger = (x) => {
