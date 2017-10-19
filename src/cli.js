@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 const makensis = require('makensis');
-const meta = require('../package.json');
-const program = require('commander');
 const YAML = require('yamljs');
 
 // Functions
@@ -191,6 +189,9 @@ const printFlags = (input, target = 'json') => {
 const isInteger = (x) => {
   return x % 2 === 0;
 };
+
+const meta = require('../package.json');
+const program = require('commander');
 
 const validCharsets = [
   'ACP',

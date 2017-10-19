@@ -2,8 +2,6 @@
 'use strict';
 
 var makensis = require('makensis');
-var meta = require('../package.json');
-var program = require('commander');
 var YAML = require('yamljs');
 
 // Functions
@@ -202,6 +200,9 @@ var printFlags = function printFlags(input) {
 var isInteger = function isInteger(x) {
   return x % 2 === 0;
 };
+
+var meta = require('../package.json');
+var program = require('commander');
 
 var validCharsets = ['ACP', 'OEM', 'UTF8', 'UTF16BE', 'UTF16LE'];
 
