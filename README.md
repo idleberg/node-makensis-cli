@@ -59,8 +59,6 @@ Alternatively, you can setup NSIS in your [Wine](http://winehq.org/) environment
 
 ### Options
 
-**Note:** The following examples use the package name `makensis-cli` as command. However, the script is also linked against the much shorter `nsis`!
-
 Running `makensis-cli help` lists all available options:
 
 ```
