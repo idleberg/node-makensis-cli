@@ -180,6 +180,9 @@ $ makensis-cli compile demo.nsi --verbose 2 --strict --json
 #   "stderr": "Error: warning treated as error"
 # }
 ```
+
+For illustration purposes, we used `makensis-cli` throughout the examples above. However, you might be happy to hear about the shorter `nsis` alias.
+
 ## License
 
 This work is licensed under [The MIT License](https://opensource.org/licenses/MIT)
