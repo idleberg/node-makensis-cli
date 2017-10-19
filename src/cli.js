@@ -32,7 +32,7 @@ const compile = (filePath, options = null) => {
 const hdrinfo = (options = null) => {
   options || (options = {});
 
-  makensis.hdrInfo()
+  makensis.hdrInfo(options)
   .then(output => {
     // due to an error in makensis, this code should never run
     if (options.target !== null) {

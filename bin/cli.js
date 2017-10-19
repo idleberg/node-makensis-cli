@@ -36,7 +36,7 @@ var hdrinfo = function hdrinfo() {
 
   options || (options = {});
 
-  makensis.hdrInfo().then(function (output) {
+  makensis.hdrInfo(options).then(function (output) {
     // due to an error in makensis, this code should never run
     if (options.target !== null) {
       printFlags(output.stdout, options.target);
