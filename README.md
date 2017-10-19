@@ -16,7 +16,7 @@ Admittedly, there are only few reasons why you would want to use a wrapper for a
 
 - seamless [Wine](http://winehq.org/) integration
 - Unix-like command-line parameters
-- JSON output
+- JSON & YAMP output option
 
 **Cons:**
 
