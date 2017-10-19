@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
+const join = require('path').join;
+
 /*  The TypeScript compiler does not support she-bangs,
- *  so we need this work-around :rolleyes:
+ *  so we need this stupid workaround 🙄
  */
-require('./bin/makensis-cli.js');
+require(join(__dirname, 'bin/makensis-cli.js'));
