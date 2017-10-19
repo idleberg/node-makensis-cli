@@ -2,7 +2,7 @@
 'use strict';
 
 var meta = require('../package.json');
-var Util = require('./util');
+var Util = require('./util.js');
 var program = require('commander');
 
 var validCharsets = ['ACP', 'OEM', 'UTF8', 'UTF16BE', 'UTF16LE'];

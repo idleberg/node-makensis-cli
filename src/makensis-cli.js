@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const meta = require('../package.json');
-const Util = require('./util');
+const Util = require('./util.js');
 const program = require('commander');
 
 const validCharsets = [
