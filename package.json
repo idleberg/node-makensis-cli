@@ -4,6 +4,7 @@
   "description": "CLI for the makensis wrapper on Node, compiles NSIS scripts",
   "main": "bin/cli.js",
   "bin": {
+    "makensis-cli": "bin/cli.js",
     "nsis": "bin/cli.js"
   },
   "files": [
