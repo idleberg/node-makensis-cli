@@ -82,7 +82,7 @@ Options:
 
 **Examples:**
 
-Let's start makensis returning its version
+Let's start with `makensis` returning its version
 
 ```sh
 $ makensis-cli version
@@ -106,7 +106,7 @@ $ makensis-cli version --json
 ```
 ____
 
-Try again for Wine
+Try again for `makensis` on Wine
 
 ```sh
 $ makensis-cli version --json --wine
@@ -119,14 +119,14 @@ $ makensis-cli version --json --wine
 ```
 ____
 
-Okay, we have to create a demo script we can use in the following steps. Take special note of the `!warning`!
+In the following steps we're going to need a demo script, so let's create one. Take special note of the `!warning` inside the section.
 
 ```sh
 $ printf "OutFile demo.exe\n\nSection\n!warning\nSectionEnd" > demo.nsi
 ```
 ____
 
-Compile our new script
+Compile the script
 
 ```sh
 $ makensis-cli compile demo.nsi
@@ -143,7 +143,7 @@ $ makensis-cli compile demo.nsi
 ```
 ____
 
-Again, but only display warnings and errors
+Compile again, but only display warnings and errors
 
 ```sh
 $ makensis-cli compile demo.nsi --verbose 2
@@ -155,7 +155,7 @@ $ makensis-cli compile demo.nsi --verbose 2
 ```
 ____
 
-This time, we use strict compiler settings. Our little `!warning` will be treated as an error.
+Complie with strict settings, so our little `!warning` will be treated as an error.
 
 ```sh
 $ makensis-cli compile demo.nsi --verbose 2 --strict
