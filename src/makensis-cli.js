@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const program = require('commander');
-import { compile, hdrinfo, cmdhelp, version } from './util';
 const meta = require('../package.json');
+const Util = require('./util');
+const program = require('commander');
 
 const validCharsets = [
   'ACP',
@@ -68,23 +68,23 @@ program
       case 'compile':
       case 'm':
       case 'make':
-        compile(filePath, options);
+        Util.compile(filePath, options);
         break;
       case 'f':
       case 'flags':
       case 'hdrinfo':
       case 'i':
       case 'info':
-        hdrinfo(options);
+        Util.hdrinfo(options);
         break;
       case 'v':
       case 'version':
-        version(options);
+        Util.version(options);
         break;
       case 'h':
       case 'cmdhelp':
       case 'help':
-        cmdhelp(filePath, options);
+        Util.cmdhelp(filePath, options);
         break;
       default:
         program.help();

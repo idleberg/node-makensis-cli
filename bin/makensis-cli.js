@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-var _util = require('./util');
-
-var program = require('commander');
-
 var meta = require('../package.json');
+var Util = require('./util');
+var program = require('commander');
 
 var validCharsets = ['ACP', 'OEM', 'UTF8', 'UTF16BE', 'UTF16LE'];
 
@@ -51,23 +49,23 @@ program.version(meta.version).description('CLI version of node-makensis').argume
     case 'compile':
     case 'm':
     case 'make':
-      (0, _util.compile)(filePath, options);
+      Util.compile(filePath, options);
       break;
     case 'f':
     case 'flags':
     case 'hdrinfo':
     case 'i':
     case 'info':
-      (0, _util.hdrinfo)(options);
+      Util.hdrinfo(options);
       break;
     case 'v':
     case 'version':
-      (0, _util.version)(options);
+      Util.version(options);
       break;
     case 'h':
     case 'cmdhelp':
     case 'help':
-      (0, _util.cmdhelp)(filePath, options);
+      Util.cmdhelp(filePath, options);
       break;
     default:
       program.help();
