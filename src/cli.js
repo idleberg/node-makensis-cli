@@ -191,6 +191,7 @@ const isInteger = (x) => {
 };
 
 const meta = require('../package.json');
+const platform = require('os').platform;
 const program = require('commander');
 
 const validInputs = [
@@ -222,7 +223,7 @@ program
     let inputCharset = (typeof flags.inputCharset !== 'undefined' && (validInputs.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null)) ? flags.inputCharset : '';
     let noCD = (typeof flags.nocd === 'undefined') ? false : true;
     let noConfig = (typeof flags.noconfig === 'undefined') ? false : true;
-    let outputCharset = (typeof flags.outputCharset !== 'undefined' ? flags.outputCharset : '';
+    let outputCharset = '';
     let pause = (typeof flags.pause === 'undefined') ? false : true;
     let ppo = (typeof flags.ppo === 'undefined') ? false : true;
     let json = (typeof flags.json === 'undefined') ? false : true;
@@ -231,6 +232,10 @@ program
     let verbose = (flags.verbose >= 0 && flags.verbose <= 4) ? flags.verbose : null;
     let wine = (typeof flags.wine === 'undefined') ? false : true;
     let yaml = (typeof flags.yaml === 'undefined') ? false : true;
+
+    if (platform() === 'win32' || wine === true) {
+      outputCharset = (typeof flags.outputCharset !== 'undefined' ? flags.outputCharset : '';
+    }
 
     let target = null;
     if (yaml === true && json === false) {
@@ -287,5 +292,3 @@ program
 .parse(process.argv);
 
 if (program.args.length === 0) program.help();
-
-
