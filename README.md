@@ -66,17 +66,18 @@ Usage: makensis-cli <command> [file.nsi] [options]
 
 Options:
 
-  -V, --version                 output the version number
-  -i, --input-charset <string>  ACP|OEM|CP#|UTF8|UTF16[LE|BE]
-  -j, --json                    prints output as JSON
-  -p, --pause                   pauses after execution
-  -P, --ppo                     preprocess to stdout/file
-  -S, --safe-ppo                preprocess to stdout/file
-  -v, --verbose <n>             verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none
-  -w, --wine                    use Wine to run makenis
-  -x, --strict                  treat warnings as errors
-  -y, --yaml                    prints output as YAML
-  -h, --help                    output usage information
+  -V, --version                  output the version number
+  -i, --input-charset <string>   ACP|OEM|CP#|UTF8|UTF16<LE|BE>
+  -j, --json                     prints output as JSON
+  -p, --pause                    pauses after execution
+  -o, --output-charset <string>  ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]
+  -P, --ppo                      preprocess to stdout/file
+  -S, --safe-ppo                 preprocess to stdout/file
+  -v, --verbose <n>              verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none
+  -w, --wine                     use Wine to run makenis
+  -x, --strict                   treat warnings as errors
+  -y, --yaml                     prints output as YAML
+  -h, --help                     output usage information
 ```
 
 **Examples:**
