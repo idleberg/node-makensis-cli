@@ -234,7 +234,7 @@ program
     let yaml = (typeof flags.yaml === 'undefined') ? false : true;
 
     if (platform() === 'win32' || wine === true) {
-      outputCharset = (typeof flags.outputCharset !== 'undefined' ? flags.outputCharset : '';
+      outputCharset = (typeof flags.outputCharset !== 'undefined') ? flags.outputCharset : '';
     }
 
     let target = null;
