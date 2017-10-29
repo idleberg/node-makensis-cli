@@ -193,7 +193,7 @@ const isInteger = (x) => {
 const meta = require('../package.json');
 const program = require('commander');
 
-const validCharsets = [
+const validInputs = [
   'ACP',
   'OEM',
   'UTF8',
@@ -207,9 +207,10 @@ program
   .description('CLI version of node-makensis')
   .arguments('<command> [file.nsi]>')
   .usage('<command> [file.nsi] [options]')
-  .option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16[LE|BE]')
+  .option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>')
   .option('-j, --json', 'prints output as JSON')
   .option('-p, --pause', 'pauses after execution')
+  .option('-o, --output-charset <string>', 'ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]')
   .option('-P, --ppo', 'preprocess to stdout/file')
   .option('-S, --safe-ppo', 'preprocess to stdout/file')
   .option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt)
@@ -218,9 +219,10 @@ program
   .option('-y, --yaml', 'prints output as YAML')
   .action(function(cmd, filePath, flags) {
 
-    let inputCharset = (typeof flags.inputCharset !== 'undefined' && (validCharsets.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null)) ? flags.inputCharset : '';
+    let inputCharset = (typeof flags.inputCharset !== 'undefined' && (validInputs.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null)) ? flags.inputCharset : '';
     let noCD = (typeof flags.nocd === 'undefined') ? false : true;
     let noConfig = (typeof flags.noconfig === 'undefined') ? false : true;
+    let outputCharset = (typeof flags.outputCharset !== 'undefined' ? flags.outputCharset : '';
     let pause = (typeof flags.pause === 'undefined') ? false : true;
     let ppo = (typeof flags.ppo === 'undefined') ? false : true;
     let json = (typeof flags.json === 'undefined') ? false : true;
@@ -242,6 +244,7 @@ program
       'json': json,
       'noCD': noCD,
       'noConfig': noConfig,
+      'outputCharset': outputCharset,
       'pause': pause,
       'ppo': ppo,
       'safePPO': safePPO,
