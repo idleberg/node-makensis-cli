@@ -125,14 +125,11 @@ var printFlags = function printFlags(input) {
   });
 
   var lastLine = filteredLines.pop();
-  // console.log(lines);
-  // console.log(lastLine);
 
   var prefix = 'Defined symbols: ';
 
   var lineData = lastLine.substring(prefix.length);
   var symbols = lineData.split(',');
-  // console.log(symbols);
 
   var table = {};
   var tableSizes = {};
@@ -147,12 +144,10 @@ var printFlags = function printFlags(input) {
 
     var obj = {};
     tableSizes[pair[0]] = pair[1];
-    // tableSizes.push(pair);
   });
 
   var objSizes = {};
   table['sizes'] = tableSizes;
-  // table.push(objSizes);
 
   // Split symbols
   symbols.forEach(function (symbol) {
@@ -170,24 +165,10 @@ var printFlags = function printFlags(input) {
     }
   });
 
-  var obj = {};
   table['defined_symbols'] = tableSymbols;
-  // table.push(obj);
-
-  var config = {
-    columns: {
-      0: {
-        alignment: 'center',
-        minWidth: 10
-      },
-      1: {
-        alignment: 'center',
-        minWidth: 10
-      }
-    }
-  };
 
   var output = void 0;
+
   if (target === 'yaml') {
     output = YAML.stringify(table);
   } else {

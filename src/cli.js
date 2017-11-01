@@ -114,14 +114,11 @@ const printFlags = (input, target = 'json') => {
   });
 
   let lastLine = filteredLines.pop();
-  // console.log(lines);
-  // console.log(lastLine);
 
   const prefix = 'Defined symbols: ';
 
   let lineData = lastLine.substring(prefix.length);
   let symbols = lineData.split(',');
-  // console.log(symbols);
 
   let table = {};
   let tableSizes = {};
@@ -136,12 +133,10 @@ const printFlags = (input, target = 'json') => {
 
     let obj = {};
     tableSizes[pair[0]] = pair[1];
-    // tableSizes.push(pair);
   });
 
   let objSizes = {};
   table['sizes'] = tableSizes;
-  // table.push(objSizes);
 
   // Split symbols
   symbols.forEach((symbol) => {
@@ -159,24 +154,10 @@ const printFlags = (input, target = 'json') => {
     }
   });
 
-  let obj = {};
   table['defined_symbols'] = tableSymbols;
-  // table.push(obj);
-
-  const config = {
-    columns: {
-      0: {
-        alignment: 'center',
-        minWidth: 10
-      },
-      1: {
-        alignment: 'center',
-        minWidth: 10
-      }
-    }
-  };
 
   let output;
+
   if (target === 'yaml') {
     output = YAML.stringify(table);
   } else {
