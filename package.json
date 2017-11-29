@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.11.0",
-    "makensis": "^0.8.1",
+    "makensis": "0.8.2",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
