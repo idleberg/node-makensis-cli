@@ -85,7 +85,7 @@ Options:
 Let's start with `makensis` returning its version
 
 ```sh
-$ makensis-cli version
+$ nsis version
 
 # Result:
 #
@@ -96,7 +96,7 @@ ____
 We can also return this as JSON
 
 ```sh
-$ makensis-cli version --json
+$ nsis version --json
 
 # Result:
 #
@@ -109,7 +109,7 @@ ____
 Try again for `makensis` on Wine
 
 ```sh
-$ makensis-cli version --json --wine
+$ nsis version --json --wine
 
 # Result:
 #
@@ -129,7 +129,7 @@ ____
 Compile the script
 
 ```sh
-$ makensis-cli compile demo.nsi
+$ nsis compile demo.nsi
 
 # Result (omitted):
 #
@@ -146,7 +146,7 @@ ____
 Compile again, but only display warnings and errors
 
 ```sh
-$ makensis-cli compile demo.nsi --verbose 2
+$ nsis compile demo.nsi --verbose 2
 
 # Result:
 #
@@ -159,7 +159,7 @@ ____
 Complie with strict settings, so our little `!warning` will be treated as an error.
 
 ```sh
-$ makensis-cli compile demo.nsi --verbose 2 --strict
+$ nsis compile demo.nsi --verbose 2 --strict
 
 # Result:
 #
@@ -171,7 +171,7 @@ ____
 Let's output the above as JSON
 
 ```sh
-$ makensis-cli compile demo.nsi --verbose 2 --strict --json
+$ nsis compile demo.nsi --verbose 2 --strict --json
 
 # Result:
 #
@@ -181,8 +181,6 @@ $ makensis-cli compile demo.nsi --verbose 2 --strict --json
 #   "stderr": "Error: warning treated as error"
 # }
 ```
-
-For illustration purposes, we used `makensis-cli` throughout the examples above. However, you might be happy to hear about the shorter `nsis` alias.
 
 ## License
 
