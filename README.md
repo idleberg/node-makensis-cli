@@ -16,7 +16,7 @@ Admittedly, there are only few reasons why you would want to use a wrapper for a
 
 - seamless [Wine](http://winehq.org/) integration
 - Unix-like command-line parameters
-- optional JSON or YAML output
+- optional JSON output
 
 **Cons:**
 
@@ -76,7 +76,6 @@ Options:
   -v, --verbose <n>              verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none
   -w, --wine                     use Wine to run makenis
   -x, --strict                   treat warnings as errors
-  -y, --yaml                     prints output as YAML
   -h, --help                     output usage information
 ```
 

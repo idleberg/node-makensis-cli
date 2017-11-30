@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const makensis = require('makensis');
-const YAML = require('yamljs');
+const { objectifyFlags } = require('makensis/dist/util');
 
 // Functions
 const compile = (filePath, options = null) => {
@@ -9,18 +9,10 @@ const compile = (filePath, options = null) => {
 
   makensis.compile(filePath, options)
   .then(output => {
-    if (options.target !== null) {
-      printString(output, options.target);
-    } else if (options.yaml === true) {
-      printString(output, options.target);
-    } else {
-      console.log(output.stdout);
-    }
+    log(output, options.target);
   }).catch(output => {
-    if (options.target !== null) {
-      printString(output, options.target);
-    } else if (options.yaml === true) {
-      printString(output, options.target);
+    if (options.target === 'json') {
+      log(output, options.target);
     } else {
       console.error(`Exit Code ${output.status}\n${output.stderr}`);
     }
@@ -33,17 +25,9 @@ const hdrinfo = (options = null) => {
   makensis.hdrInfo(options)
   .then(output => {
     // due to an error in makensis, this code should never run
-    if (options.target !== null) {
-      printFlags(output.stdout, options.target);
-    } else {
-      console.log(output.stdout);
-    }
+    log(output.stdout, options.target);
   }).catch(output => {
-    if (options.target !== null) {
-      printFlags(output.stdout, options.target);
-    } else {
-      console.log(output.stdout);
-    }
+    logError(output.stdout, options.target);
   });
 };
 
@@ -52,17 +36,9 @@ const version = (options = null) => {
 
   makensis.version(options)
   .then(output => {
-    if (options.target !== null) {
-      printString(output.stdout, options.target, 'version');
-    } else {
-      console.log(output.stdout);
-    }
+    log(output.stdout, options.target);
   }).catch(output => {
-    if (options.target !== null) {
-      printString(output.stderr, options.target, 'error');
-    } else {
-      console.error(output.stderr);
-    }
+    logError(output.stderr, options.target);
   });
 };
 
@@ -74,102 +50,25 @@ const cmdhelp = (title = '', options = null) => {
     // due to an error in makensis, this code should never run
     return;
   }).catch(output => {
-    if (options.target !== null) {
-      printString(output.stderr, options.target, 'help');
-    } else {
-      console.error(output.stderr);
-    }
+    logError(output.stderr, options.target);
   });
 };
 
-const printString = (input, target = 'json', key = null) => {
-  let obj = {};
-
-  if (key === 'version' && input.startsWith('v')) {
-    input = input.substr(1);
-  }
-  if (key === null) {
-    obj = input;
+const log = (output, target) => {
+  if (target === 'json') {
+    console.log(JSON.stringify(output, null, '  '));
   } else {
-    obj[key] = input;
+    console.log(output);
   }
+}
 
-  let output;
-  if (target === 'yaml') {
-    output = YAML.stringify(obj);
+const logError = (output, target) => {
+  if (target === 'json') {
+    console.error(JSON.stringify(output, null, '  '));
   } else {
-    output = JSON.stringify(obj, null, '  ');
+    console.error(output);
   }
-
-  console.log(output);
-};
-
-const printFlags = (input, target = 'json') => {
-  let lines = input.split('\n');
-
-  let filteredLines = lines.filter((line) => {
-    if (line !== '') {
-      return line;
-    }
-  });
-
-  let lastLine = filteredLines.pop();
-
-  const prefix = 'Defined symbols: ';
-
-  let lineData = lastLine.substring(prefix.length);
-  let symbols = lineData.split(',');
-
-  let table = {};
-  let tableSizes = {};
-  let tableSymbols = {};
-
-  // Split sizes
-  filteredLines.forEach((line) => {
-    let pair = line.split(' is ');
-    pair[0] = pair[0].replace('Size of ', '');
-    pair[0] = pair[0].replace(' ', '_');
-    pair[1] = pair[1].substring(-1, pair[1].length - 1);
-
-    let obj = {};
-    tableSizes[pair[0]] = pair[1];
-  });
-
-  let objSizes = {};
-  table['sizes'] = tableSizes;
-
-  // Split symbols
-  symbols.forEach((symbol) => {
-    let pair = symbol.split('=');
-    let obj = {};
-
-    if (pair.length > 1) {
-      if (isInteger(pair[1]) === true) {
-        pair[1] = parseInt(pair[1], 10);
-      }
-
-      tableSymbols[pair[0]] = pair[1];
-    } else {
-      tableSymbols[symbol] = true;
-    }
-  });
-
-  table['defined_symbols'] = tableSymbols;
-
-  let output;
-
-  if (target === 'yaml') {
-    output = YAML.stringify(table);
-  } else {
-    output = JSON.stringify(table, null, '  ');
-  }
-
-  console.log(output);
-};
-
-const isInteger = (x) => {
-  return x % 2 === 0;
-};
+}
 
 const meta = require('../package.json');
 const platform = require('os').platform;
@@ -198,7 +97,6 @@ program
   .option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt)
   .option('-w, --wine', 'use Wine to run makenis')
   .option('-x, --strict', 'treat warnings as errors')
-  .option('-y, --yaml', 'prints output as YAML')
   .action(function(cmd, filePath, flags) {
 
     let inputCharset = (typeof flags.inputCharset !== 'undefined' && (validInputs.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null)) ? flags.inputCharset : '';
@@ -212,18 +110,12 @@ program
     let strict = (typeof flags.strict === 'undefined') ? false : true;
     let verbose = (flags.verbose >= 0 && flags.verbose <= 4) ? flags.verbose : null;
     let wine = (typeof flags.wine === 'undefined') ? false : true;
-    let yaml = (typeof flags.yaml === 'undefined') ? false : true;
 
     if (platform() === 'win32' || wine === true) {
       outputCharset = (typeof flags.outputCharset !== 'undefined') ? flags.outputCharset : '';
     }
 
-    let target = null;
-    if (yaml === true && json === false) {
-      target = 'yaml'
-    } else if (json === true && yaml === false) {
-      target = 'json'
-    }
+    let target = (json === true) ? 'json' : null;
 
     const options = {
       'inputCharset': inputCharset,
@@ -238,7 +130,6 @@ program
       'target': target,
       'verbose': verbose,
       'wine': wine,
-      'yaml': yaml
     };
 
     switch (cmd) {
