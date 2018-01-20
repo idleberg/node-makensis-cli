@@ -6,6 +6,9 @@ var makensis = require('makensis');
 var _require = require('makensis/dist/util'),
     objectifyFlags = _require.objectifyFlags;
 
+var _require2 = require('path'),
+    extname = _require2.extname;
+
 // Functions
 
 
@@ -15,10 +18,10 @@ var compile = function compile(filePath) {
   options || (options = {});
 
   makensis.compile(filePath, options).then(function (output) {
-    log(output, options.target);
+    log(output, options.json);
   }).catch(function (output) {
-    if (options.target === 'json') {
-      log(output, options.target);
+    if (options.json === 'json') {
+      log(output, options.json);
     } else {
       console.error('Exit Code ' + output.status + '\n' + output.stderr);
     }
@@ -32,9 +35,9 @@ var hdrinfo = function hdrinfo() {
 
   makensis.hdrInfo(options).then(function (output) {
     // due to an error in makensis, this code should never run
-    log(output.stdout, options.target);
+    log(output, options.json);
   }).catch(function (output) {
-    logError(output.stdout, options.target);
+    logError(output.stdout, options.json);
   });
 };
 
@@ -44,9 +47,9 @@ var version = function version() {
   options || (options = {});
 
   makensis.version(options).then(function (output) {
-    log(output.stdout, options.target);
+    log(output, options.json);
   }).catch(function (output) {
-    logError(output.stderr, options.target);
+    logError(output.stderr, options.json);
   });
 };
 
@@ -60,20 +63,20 @@ var cmdhelp = function cmdhelp() {
     // due to an error in makensis, this code should never run
     return;
   }).catch(function (output) {
-    logError(output.stderr, options.target);
+    logError(output.stderr, options.json);
   });
 };
 
-var log = function log(output, target) {
-  if (target === 'json') {
+var log = function log(output, isJson) {
+  if (isJson === true) {
     console.log(JSON.stringify(output, null, '  '));
   } else {
-    console.log(output);
+    console.log(output.stdout);
   }
 };
 
-var logError = function logError(output, target) {
-  if (target === 'json') {
+var logError = function logError(output, isJson) {
+  if (isJson === true) {
     console.error(JSON.stringify(output, null, '  '));
   } else {
     console.error(output);
@@ -87,7 +90,7 @@ var program = require('commander');
 var validInputs = ['ACP', 'OEM', 'UTF8', 'UTF16BE', 'UTF16LE'];
 
 // Action
-program.version(meta.version).description('CLI version of node-makensis').arguments('<command> [file.nsi]>').usage('<command> [file.nsi] [options]').option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>').option('-j, --json', 'prints output as JSON').option('-p, --pause', 'pauses after execution').option('-o, --output-charset <string>', 'ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]').option('-P, --ppo', 'preprocess to stdout/file').option('-S, --safe-ppo', 'preprocess to stdout/file').option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt).option('-w, --wine', 'use Wine to run makenis').option('-x, --strict', 'treat warnings as errors').action(function (cmd, filePath, flags) {
+program.version(meta.version).description('CLI version of node-makensis').arguments('[command] [file.nsi]>').option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>').option('-j, --json', 'prints output as JSON').option('-p, --pause', 'pauses after execution').option('-o, --output-charset <string>', 'ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]').option('-P, --ppo', 'preprocess to stdout/file').option('-S, --safe-ppo', 'preprocess to stdout/file').option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt).option('-w, --wine', 'use Wine to run makenis').option('-x, --strict', 'treat warnings as errors').action(function (cmd, filePath, flags) {
 
   var inputCharset = typeof flags.inputCharset !== 'undefined' && (validInputs.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null) ? flags.inputCharset : '';
   var noCD = typeof flags.nocd === 'undefined' ? false : true;
@@ -105,8 +108,6 @@ program.version(meta.version).description('CLI version of node-makensis').argume
     outputCharset = typeof flags.outputCharset !== 'undefined' ? flags.outputCharset : '';
   }
 
-  var target = json === true ? 'json' : null;
-
   var options = {
     'inputCharset': inputCharset,
     'json': json,
@@ -117,19 +118,12 @@ program.version(meta.version).description('CLI version of node-makensis').argume
     'ppo': ppo,
     'safePPO': safePPO,
     'strict': strict,
-    'target': target,
+    // 'target': target,
     'verbose': verbose,
     'wine': wine
   };
 
   switch (cmd) {
-    case 'build':
-    case 'c':
-    case 'compile':
-    case 'm':
-    case 'make':
-      compile(filePath, options);
-      break;
     case 'f':
     case 'flags':
     case 'hdrinfo':
@@ -147,8 +141,12 @@ program.version(meta.version).description('CLI version of node-makensis').argume
       cmdhelp(filePath, options);
       break;
     default:
+      if (extname(cmd) === '.nsi' || extname(cmd) === '.bnsi') {
+        compile(cmd, options);
+        break;
+      }
+
       program.help();
-      break;
   }
 }).parse(process.argv);
 

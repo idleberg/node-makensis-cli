@@ -2,6 +2,7 @@
 
 const makensis = require('makensis');
 const { objectifyFlags } = require('makensis/dist/util');
+const {extname } = require('path');
 
 // Functions
 const compile = (filePath, options = null) => {
@@ -9,10 +10,10 @@ const compile = (filePath, options = null) => {
 
   makensis.compile(filePath, options)
   .then(output => {
-    log(output, options.target);
+    log(output, options.json);
   }).catch(output => {
-    if (options.target === 'json') {
-      log(output, options.target);
+    if (options.json === 'json') {
+      log(output, options.json);
     } else {
       console.error(`Exit Code ${output.status}\n${output.stderr}`);
     }
@@ -25,9 +26,9 @@ const hdrinfo = (options = null) => {
   makensis.hdrInfo(options)
   .then(output => {
     // due to an error in makensis, this code should never run
-    log(output.stdout, options.target);
+    log(output, options.json);
   }).catch(output => {
-    logError(output.stdout, options.target);
+    logError(output.stdout, options.json);
   });
 };
 
@@ -36,9 +37,9 @@ const version = (options = null) => {
 
   makensis.version(options)
   .then(output => {
-    log(output.stdout, options.target);
+    log(output, options.json);
   }).catch(output => {
-    logError(output.stderr, options.target);
+    logError(output.stderr, options.json);
   });
 };
 
@@ -50,20 +51,20 @@ const cmdhelp = (title = '', options = null) => {
     // due to an error in makensis, this code should never run
     return;
   }).catch(output => {
-    logError(output.stderr, options.target);
+    logError(output.stderr, options.json);
   });
 };
 
-const log = (output, target) => {
-  if (target === 'json') {
+const log = (output, isJson) => {
+  if (isJson === true) {
     console.log(JSON.stringify(output, null, '  '));
   } else {
-    console.log(output);
+    console.log(output.stdout);
   }
 }
 
-const logError = (output, target) => {
-  if (target === 'json') {
+const logError = (output, isJson) => {
+  if (isJson === true) {
     console.error(JSON.stringify(output, null, '  '));
   } else {
     console.error(output);
@@ -86,8 +87,7 @@ const validInputs = [
 program
   .version(meta.version)
   .description('CLI version of node-makensis')
-  .arguments('<command> [file.nsi]>')
-  .usage('<command> [file.nsi] [options]')
+  .arguments('[command] [file.nsi]>')
   .option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>')
   .option('-j, --json', 'prints output as JSON')
   .option('-p, --pause', 'pauses after execution')
@@ -115,8 +115,6 @@ program
       outputCharset = (typeof flags.outputCharset !== 'undefined') ? flags.outputCharset : '';
     }
 
-    let target = (json === true) ? 'json' : null;
-
     const options = {
       'inputCharset': inputCharset,
       'json': json,
@@ -127,19 +125,12 @@ program
       'ppo': ppo,
       'safePPO': safePPO,
       'strict': strict,
-      'target': target,
+      // 'target': target,
       'verbose': verbose,
       'wine': wine,
     };
 
     switch (cmd) {
-      case 'build':
-      case 'c':
-      case 'compile':
-      case 'm':
-      case 'make':
-        compile(filePath, options);
-        break;
       case 'f':
       case 'flags':
       case 'hdrinfo':
@@ -157,8 +148,12 @@ program
         cmdhelp(filePath, options);
         break;
       default:
+        if (extname(cmd) === '.nsi' || extname(cmd) === '.bnsi') {
+          compile(cmd, options);
+          break;
+        }
+
         program.help();
-        break;
     }
   })
 .parse(process.argv);
