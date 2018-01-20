@@ -6,9 +6,9 @@ var makensis = require('makensis');
 var _require = require('path'),
     extname = _require.extname;
 
-var YAML = require('yamljs');
-
 // Functions
+
+
 var compile = function compile(filePath) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
@@ -17,7 +17,7 @@ var compile = function compile(filePath) {
   makensis.compile(filePath, options).then(function (output) {
     log(output, options);
   }).catch(function (output) {
-    if (options.json === true || options.yaml === true) {
+    if (options.json === true) {
       log(output, options);
     } else {
       console.error('Exit Code ' + output.status + '\n' + output.stderr);
@@ -67,8 +67,6 @@ var cmdhelp = function cmdhelp() {
 var log = function log(output, options) {
   if (options.json === true) {
     console.log(JSON.stringify(output, null, 2));
-  } else if (options.yaml === true) {
-    console.log(YAML.stringify(output));
   } else {
     console.log(output.stdout);
   }
@@ -77,8 +75,6 @@ var log = function log(output, options) {
 var logError = function logError(output, options) {
   if (options.json === true) {
     console.error(JSON.stringify(output, null, 2));
-  } else if (options.yaml === true) {
-    console.error(YAML.stringify(output));
   } else {
     console.error(output);
   }
@@ -91,7 +87,7 @@ var program = require('commander');
 var validInputs = ['ACP', 'OEM', 'UTF8', 'UTF16BE', 'UTF16LE'];
 
 // Action
-program.version(meta.version).description('CLI version of node-makensis').arguments('[command] [file.nsi]').usage('[command] [file.nsi] [options]').option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>').option('-j, --json', 'prints output as JSON').option('-p, --pause', 'pauses after execution').option('-o, --output-charset <string>', 'ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]').option('-P, --ppo', 'preprocess to stdout/file').option('-S, --safe-ppo', 'preprocess to stdout/file').option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt).option('-w, --wine', 'use Wine to run makenis').option('-y, --yaml', 'prints output as YAML').option('-x, --strict', 'treat warnings as errors').action(function (cmd, filePath, flags) {
+program.version(meta.version).description('CLI version of node-makensis').arguments('[command] [file.nsi]').usage('[command] [file.nsi] [options]').option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>').option('-j, --json', 'prints output as JSON').option('-p, --pause', 'pauses after execution').option('-o, --output-charset <string>', 'ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]').option('-P, --ppo', 'preprocess to stdout/file').option('-S, --safe-ppo', 'preprocess to stdout/file').option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt).option('-w, --wine', 'use Wine to run makenis').option('-x, --strict', 'treat warnings as errors').action(function (cmd, filePath, flags) {
 
   var inputCharset = typeof flags.inputCharset !== 'undefined' && (validInputs.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null) ? flags.inputCharset : '';
   var noCD = typeof flags.nocd === 'undefined' ? false : true;
@@ -104,7 +100,6 @@ program.version(meta.version).description('CLI version of node-makensis').argume
   var strict = typeof flags.strict === 'undefined' ? false : true;
   var verbose = flags.verbose >= 0 && flags.verbose <= 4 ? flags.verbose : null;
   var wine = typeof flags.wine === 'undefined' ? false : true;
-  var yaml = typeof flags.yaml === 'undefined' ? false : true;
 
   if (platform() === 'win32' || wine === true) {
     outputCharset = typeof flags.outputCharset !== 'undefined' ? flags.outputCharset : '';
@@ -121,8 +116,7 @@ program.version(meta.version).description('CLI version of node-makensis').argume
     'safePPO': safePPO,
     'strict': strict,
     'verbose': verbose,
-    'wine': wine,
-    'yaml': yaml
+    'wine': wine
   };
 
   switch (cmd) {
