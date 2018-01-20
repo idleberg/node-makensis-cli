@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const makensis = require('makensis');
-const { objectifyFlags } = require('makensis/dist/util');
 const {extname } = require('path');
+const YAML = require('yamljs');
 
 // Functions
 const compile = (filePath, options = null) => {
@@ -10,10 +10,10 @@ const compile = (filePath, options = null) => {
 
   makensis.compile(filePath, options)
   .then(output => {
-    log(output, options.json);
+    log(output, options);
   }).catch(output => {
-    if (options.json === 'json') {
-      log(output, options.json);
+    if (options.json === true || options.yaml === true) {
+      log(output, options);
     } else {
       console.error(`Exit Code ${output.status}\n${output.stderr}`);
     }
@@ -26,9 +26,9 @@ const hdrinfo = (options = null) => {
   makensis.hdrInfo(options)
   .then(output => {
     // due to an error in makensis, this code should never run
-    log(output, options.json);
+    log(output, options);
   }).catch(output => {
-    logError(output.stdout, options.json);
+    logError(output.stdout, options);
   });
 };
 
@@ -37,9 +37,9 @@ const version = (options = null) => {
 
   makensis.version(options)
   .then(output => {
-    log(output, options.json);
+    log(output, options);
   }).catch(output => {
-    logError(output.stderr, options.json);
+    logError(output.stderr, options);
   });
 };
 
@@ -51,21 +51,25 @@ const cmdhelp = (title = '', options = null) => {
     // due to an error in makensis, this code should never run
     return;
   }).catch(output => {
-    logError(output.stderr, options.json);
+    logError(output.stderr, options);
   });
 };
 
-const log = (output, isJson) => {
-  if (isJson === true) {
-    console.log(JSON.stringify(output, null, '  '));
+const log = (output, options) => {
+  if (options.json === true) {
+    console.log(JSON.stringify(output, null, 2));
+  } else if (options.yaml === true) {
+    console.log(YAML.stringify(output));
   } else {
     console.log(output.stdout);
   }
 }
 
-const logError = (output, isJson) => {
-  if (isJson === true) {
-    console.error(JSON.stringify(output, null, '  '));
+const logError = (output, options) => {
+  if (options.json === true) {
+    console.error(JSON.stringify(output, null, 2));
+  } else if (options.yaml === true) {
+    console.error(YAML.stringify(output));
   } else {
     console.error(output);
   }
@@ -87,7 +91,8 @@ const validInputs = [
 program
   .version(meta.version)
   .description('CLI version of node-makensis')
-  .arguments('[command] [file.nsi]>')
+  .arguments('[command] [file.nsi]')
+  .usage('[command] [file.nsi] [options]')
   .option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>')
   .option('-j, --json', 'prints output as JSON')
   .option('-p, --pause', 'pauses after execution')
@@ -96,6 +101,7 @@ program
   .option('-S, --safe-ppo', 'preprocess to stdout/file')
   .option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt)
   .option('-w, --wine', 'use Wine to run makenis')
+  .option('-y, --yaml', 'prints output as YAML')
   .option('-x, --strict', 'treat warnings as errors')
   .action(function(cmd, filePath, flags) {
 
@@ -110,6 +116,7 @@ program
     let strict = (typeof flags.strict === 'undefined') ? false : true;
     let verbose = (flags.verbose >= 0 && flags.verbose <= 4) ? flags.verbose : null;
     let wine = (typeof flags.wine === 'undefined') ? false : true;
+    let yaml = (typeof flags.yaml === 'undefined') ? false : true;
 
     if (platform() === 'win32' || wine === true) {
       outputCharset = (typeof flags.outputCharset !== 'undefined') ? flags.outputCharset : '';
@@ -125,9 +132,9 @@ program
       'ppo': ppo,
       'safePPO': safePPO,
       'strict': strict,
-      // 'target': target,
       'verbose': verbose,
       'wine': wine,
+      'yaml': yaml
     };
 
     switch (cmd) {
@@ -142,11 +149,13 @@ program
       case 'version':
         version(options);
         break;
-      case 'h':
       case 'cmdhelp':
       case 'help':
         cmdhelp(filePath, options);
         break;
+      case 'h':
+      case 'help':
+        program.help();
       default:
         if (extname(cmd) === '.nsi' || extname(cmd) === '.bnsi') {
           compile(cmd, options);
