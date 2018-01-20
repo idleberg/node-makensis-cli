@@ -127,7 +127,7 @@ ____
 Compile the script
 
 ```sh
-$ nsis compile demo.nsi
+$ nsis demo.nsi
 
 # Result (omitted):
 #
@@ -144,7 +144,7 @@ ____
 Compile again, but only display warnings and errors
 
 ```sh
-$ nsis compile demo.nsi --verbose 2
+$ nsis demo.nsi --verbose 2
 
 # Result:
 #
@@ -157,7 +157,7 @@ ____
 Complie with strict settings, so our little `!warning` will be treated as an error.
 
 ```sh
-$ nsis compile demo.nsi --verbose 2 --strict
+$ nsis demo.nsi --verbose 2 --strict
 
 # Result:
 #
@@ -169,7 +169,7 @@ ____
 Let's output the above as JSON
 
 ```sh
-$ nsis compile demo.nsi --verbose 2 --strict --json
+$ nsis demo.nsi --verbose 2 --strict --json
 
 # Result:
 #
