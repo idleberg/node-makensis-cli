@@ -22,7 +22,8 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.11.0",
-    "makensis": "^0.9.0"
+    "makensis": "^0.9.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

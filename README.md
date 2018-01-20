@@ -50,19 +50,21 @@ Alternatively, you can setup NSIS in your [Wine](http://winehq.org/) environment
 
 ## Usage
 
-### Commands
+By 
 
-- `compile <file.nsi>` – compiles provided script (Aliases: `c|build|make` )
+### Sub-Commands
+
+- `help` – prints help (Alias: `h`)
 - `hdrinfo` – prints information about what options makensis was compiled with (Aliases: `f|flags|i|info`)
 - `version` – prints the makensis version and exits (Alias: `v`)
-- `cmdhelp [item]` – prints out help for 'item', or lists all commands (Aliases: `h|help`)
+- `cmdhelp [item]` – prints out help for 'item', or lists all commands
 
 ### Options
 
 Running `makensis-cli --help` lists all available options:
 
 ```
-Usage: makensis-cli <command> [file.nsi] [options]
+Usage: makensis-cli [command] [file.nsi] [options]
 
 Options:
 
