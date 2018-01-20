@@ -2,7 +2,6 @@
 
 const makensis = require('makensis');
 const {extname } = require('path');
-const YAML = require('yamljs');
 
 // Functions
 const compile = (filePath, options = null) => {
@@ -12,7 +11,7 @@ const compile = (filePath, options = null) => {
   .then(output => {
     log(output, options);
   }).catch(output => {
-    if (options.json === true || options.yaml === true) {
+    if (options.json === true) {
       log(output, options);
     } else {
       console.error(`Exit Code ${output.status}\n${output.stderr}`);
@@ -58,8 +57,6 @@ const cmdhelp = (title = '', options = null) => {
 const log = (output, options) => {
   if (options.json === true) {
     console.log(JSON.stringify(output, null, 2));
-  } else if (options.yaml === true) {
-    console.log(YAML.stringify(output));
   } else {
     console.log(output.stdout);
   }
@@ -68,8 +65,6 @@ const log = (output, options) => {
 const logError = (output, options) => {
   if (options.json === true) {
     console.error(JSON.stringify(output, null, 2));
-  } else if (options.yaml === true) {
-    console.error(YAML.stringify(output));
   } else {
     console.error(output);
   }
@@ -101,7 +96,6 @@ program
   .option('-S, --safe-ppo', 'preprocess to stdout/file')
   .option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt)
   .option('-w, --wine', 'use Wine to run makenis')
-  .option('-y, --yaml', 'prints output as YAML')
   .option('-x, --strict', 'treat warnings as errors')
   .action(function(cmd, filePath, flags) {
 
@@ -116,7 +110,6 @@ program
     let strict = (typeof flags.strict === 'undefined') ? false : true;
     let verbose = (flags.verbose >= 0 && flags.verbose <= 4) ? flags.verbose : null;
     let wine = (typeof flags.wine === 'undefined') ? false : true;
-    let yaml = (typeof flags.yaml === 'undefined') ? false : true;
 
     if (platform() === 'win32' || wine === true) {
       outputCharset = (typeof flags.outputCharset !== 'undefined') ? flags.outputCharset : '';
@@ -133,8 +126,7 @@ program
       'safePPO': safePPO,
       'strict': strict,
       'verbose': verbose,
-      'wine': wine,
-      'yaml': yaml
+      'wine': wine
     };
 
     switch (cmd) {
