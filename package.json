@@ -34,6 +34,7 @@
   },
   "scripts": {
     "build": "babel ./src -d ./bin --babelrc",
-    "prepublish": "gulp lint && npm run build"
+    "prepublish": "gulp lint && npm run build",
+    "test": "gulp lint"
   }
 }
