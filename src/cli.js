@@ -9,7 +9,11 @@ const compile = (filePath, options = null) => {
 
   makensis.compile(filePath, options)
   .then(output => {
-    log(output, options);
+    if (options.json === true) {
+      log(output, options);
+    } else {
+      log(output.stdout, options);
+    }
   }).catch(output => {
     if (options.json === true) {
       log(output, options);
@@ -24,9 +28,9 @@ const hdrinfo = (options = null) => {
 
   makensis.hdrInfo(options)
   .then(output => {
-    // due to an error in makensis, this code should never run
-    log(output, options);
+    log(output.stdout, options);
   }).catch(output => {
+    // fallback for NSIS < 3.03
     logError(output.stdout, options);
   });
 };
@@ -36,7 +40,7 @@ const version = (options = null) => {
 
   makensis.version(options)
   .then(output => {
-    log(output, options);
+    log(output.stdout, options);
   }).catch(output => {
     logError(output.stderr, options);
   });

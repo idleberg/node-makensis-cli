@@ -15,7 +15,11 @@ var compile = function compile(filePath) {
   options || (options = {});
 
   makensis.compile(filePath, options).then(function (output) {
-    log(output, options);
+    if (options.json === true) {
+      log(output, options);
+    } else {
+      log(output.stdout, options);
+    }
   }).catch(function (output) {
     if (options.json === true) {
       log(output, options);
@@ -31,9 +35,9 @@ var hdrinfo = function hdrinfo() {
   options || (options = {});
 
   makensis.hdrInfo(options).then(function (output) {
-    // due to an error in makensis, this code should never run
-    log(output, options);
+    log(output.stdout, options);
   }).catch(function (output) {
+    // fallback for NSIS < 3.03
     logError(output.stdout, options);
   });
 };
@@ -44,7 +48,7 @@ var version = function version() {
   options || (options = {});
 
   makensis.version(options).then(function (output) {
-    log(output, options);
+    log(output.stdout, options);
   }).catch(function (output) {
     logError(output.stderr, options);
   });
