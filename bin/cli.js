@@ -60,10 +60,10 @@ var cmdhelp = function cmdhelp(command) {
   options || (options = {});
 
   makensis.cmdHelp(command, options).then(function (output) {
-    log(output.stderr, options);
+    log(output.stdout, options);
   }).catch(function (output) {
     // fallback for NSIS < 3.03
-    logError(output.stderr, options);
+    logError(output.stdout, options);
   });
 };
 

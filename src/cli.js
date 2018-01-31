@@ -51,10 +51,10 @@ const cmdhelp = (command, options = null) => {
 
   makensis.cmdHelp(command, options)
   .then(output => {
-    log(output.stderr, options);
+    log(output.stdout, options);
   }).catch(output => {
     // fallback for NSIS < 3.03
-    logError(output.stderr, options);
+    logError(output.stdout, options);
   });
 };
 
