@@ -42,14 +42,14 @@ const version = (options = null) => {
   });
 };
 
-const cmdhelp = (title = '', options = null) => {
+const cmdhelp = (command, options = null) => {
   options || (options = {});
 
-  makensis.cmdHelp(title, options)
+  makensis.cmdHelp(command, options)
   .then(output => {
-    // due to an error in makensis, this code should never run
-    return;
+    log(output.stderr, options);
   }).catch(output => {
+    // fallback for NSIS < 3.03
     logError(output.stderr, options);
   });
 };
@@ -58,7 +58,7 @@ const log = (output, options) => {
   if (options.json === true) {
     console.log(JSON.stringify(output, null, 2));
   } else {
-    console.log(output.stdout);
+    console.log(output);
   }
 }
 
@@ -143,6 +143,7 @@ program
         break;
       case 'cmdhelp':
       case 'help':
+        filePath = (typeof filePath === 'undefined') ? '' : filePath;
         cmdhelp(filePath, options);
         break;
       case 'h':

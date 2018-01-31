@@ -50,16 +50,15 @@ var version = function version() {
   });
 };
 
-var cmdhelp = function cmdhelp() {
-  var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+var cmdhelp = function cmdhelp(command) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   options || (options = {});
 
-  makensis.cmdHelp(title, options).then(function (output) {
-    // due to an error in makensis, this code should never run
-    return;
+  makensis.cmdHelp(command, options).then(function (output) {
+    log(output.stderr, options);
   }).catch(function (output) {
+    // fallback for NSIS < 3.03
     logError(output.stderr, options);
   });
 };
@@ -68,7 +67,7 @@ var log = function log(output, options) {
   if (options.json === true) {
     console.log(JSON.stringify(output, null, 2));
   } else {
-    console.log(output.stdout);
+    console.log(output);
   }
 };
 
@@ -133,6 +132,7 @@ program.version(meta.version).description('CLI version of node-makensis').argume
       break;
     case 'cmdhelp':
     case 'help':
+      filePath = typeof filePath === 'undefined' ? '' : filePath;
       cmdhelp(filePath, options);
       break;
     case 'h':
