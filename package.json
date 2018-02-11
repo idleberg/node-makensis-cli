@@ -4,8 +4,7 @@
   "description": "CLI for the makensis wrapper on Node, compiles NSIS scripts",
   "main": "bin/cli.js",
   "bin": {
-    "makensis-cli": "bin/cli.js",
-    "nsis": "bin/cli.js"
+    "nsis": "./index.js"
   },
   "files": [
     "dist/"
@@ -22,7 +21,8 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.13.0",
-    "makensis": "^0.12.0"
+    "makensis": "^0.12.0",
+    "update-notifier": "^2.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
