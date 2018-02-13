@@ -1,11 +1,9 @@
-#!/usr/bin/env node
-
-const makensis = require('makensis');
-const {extname } = require('path');
+import * as makensis from 'makensis';
+import { extname } from 'path';
 
 // Functions
-const compile = (filePath, options = null) => {
-  options || (options = {});
+const compile = (filePath: string, options: CompilerOptions = {}): void => {
+  Object.assign(options, {});
 
   makensis.compile(filePath, options)
   .then(output => {
@@ -23,8 +21,8 @@ const compile = (filePath, options = null) => {
   });
 };
 
-const hdrinfo = (options = null) => {
-  options || (options = {});
+const hdrinfo = (options: CompilerOptions = {}): void => {
+  Object.assign(options, { verbose: 0 });
 
   makensis.hdrInfo(options)
   .then(output => {
@@ -35,8 +33,8 @@ const hdrinfo = (options = null) => {
   });
 };
 
-const version = (options = null) => {
-  options || (options = {});
+const version = (options: CompilerOptions = {}): void => {
+  Object.assign(options, { verbose: 0 });
 
   makensis.version(options)
   .then(output => {
@@ -46,8 +44,8 @@ const version = (options = null) => {
   });
 };
 
-const cmdhelp = (command, options = null) => {
-  options || (options = {});
+const cmdhelp = (command: string = '', options: CompilerOptions = {}): void => {
+  Object.assign(options, { verbose: 0 });
 
   makensis.cmdHelp(command, options)
   .then(output => {
@@ -58,21 +56,21 @@ const cmdhelp = (command, options = null) => {
   });
 };
 
-const log = (output, options) => {
+const log = (output, options): void => {
   if (options.json === true) {
     console.log(JSON.stringify(output, null, 2));
   } else {
     console.log(output);
   }
-}
+};
 
-const logError = (output, options) => {
+const logError = (output, options): void => {
   if (options.json === true) {
     console.error(JSON.stringify(output, null, 2));
   } else {
     console.error(output);
   }
-}
+};
 
 const meta = require('../package.json');
 const platform = require('os').platform;
@@ -153,6 +151,7 @@ program
       case 'h':
       case 'help':
         program.help();
+        break;
       default:
         if (extname(cmd) === '.nsi' || extname(cmd) === '.bnsi') {
           compile(cmd, options);
