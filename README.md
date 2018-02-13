@@ -16,6 +16,7 @@ Admittedly, there are only few reasons why you would want to use a wrapper for a
 
 - seamless [Wine](http://winehq.org/) integration
 - Unix-like command-line parameters
+- normalized output
 - optional JSON output
 
 **Cons:**
@@ -30,7 +31,7 @@ On non-Windows platforms, you can usually install NSIS with your package manager
 
 ```sh
 # Debian
-sudo apt-get install nsis
+sudo apt-get -t experimental install nsis
 
 # Red Hat
 sudo dnf install nsis
