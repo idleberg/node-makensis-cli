@@ -177,7 +177,8 @@ $ nsis demo.nsi --verbose 2 --strict --json
 # {
 #   "status": 1,
 #   "stdout": "warning: !warning:  (demo.nsi:4)",
-#   "stderr": "Error: warning treated as error"
+#   "stderr": "Error: warning treated as error",
+#   "warnings": 1
 # }
 ```
 
