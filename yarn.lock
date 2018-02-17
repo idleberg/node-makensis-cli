@@ -343,9 +343,9 @@ make-dir@^1.0.0:
   dependencies:
     pify "^3.0.0"
 
-makensis@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/makensis/-/makensis-0.12.2.tgz#1d6c2171d9f28c3852c3d7356f5c75183098a4fa"
+makensis@^0.12.4:
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/makensis/-/makensis-0.12.4.tgz#b22be939104de233ec28e045a8674ccc73a161ee"
 
 minimatch@^3.0.4:
   version "3.0.4"

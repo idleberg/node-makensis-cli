@@ -18,7 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.14.1",
-    "makensis": "^0.12.2",
+    "makensis": "^0.12.4",
     "update-notifier": "^2.3.0"
   },
   "devDependencies": {
