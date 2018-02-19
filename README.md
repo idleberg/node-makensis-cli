@@ -51,6 +51,8 @@ Alternatively, you can setup NSIS in your [Wine](http://winehq.org/) environment
 
 ## Usage
 
+You can evoke this wrapper using `nsis` or, since Windows users already have `NSIS.exe` in the PATH, using the `nn` shorthand.
+
 ### Sub-Commands
 
 - `hdrinfo` – prints information about what options makensis was compiled with (Aliases: `f|flags|i|info`)
