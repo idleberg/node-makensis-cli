@@ -51,7 +51,7 @@ Alternatively, you can setup NSIS in your [Wine](http://winehq.org/) environment
 
 ## Usage
 
-You can evoke this wrapper using `nsis` or, since Windows users already have `NSIS.exe` in the PATH, using the `nn` shorthand.
+You can evoke this wrapper using `nsis` or, since Windows users already have `NSIS.exe` in the PATH, using the `mn` shorthand.
 
 ### Sub-Commands
 
