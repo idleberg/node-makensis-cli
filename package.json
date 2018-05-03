@@ -1,10 +1,10 @@
 {
   "name": "makensis-cli",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "CLI for the makensis wrapper on Node, compiles NSIS scripts",
   "main": "index.js",
   "bin": {
-    "nn": "./index.js",
+    "mn": "./index.js",
     "nsis": "./index.js"
   },
   "repository": {
@@ -23,7 +23,6 @@
     "update-notifier": "^2.5.0"
   },
   "devDependencies": {
-    "@types/node": "^10.0.3",
     "tslint": "^5.9.1",
     "typescript": "^2.8.1"
   },

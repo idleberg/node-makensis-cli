@@ -2,9 +2,15 @@
 # yarn lockfile v1
 
 
+<<<<<<< HEAD
 "@types/node@^10.0.3":
   version "10.0.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.0.3.tgz#1f89840c7aac2406cc43a2ecad98fc02a8e130e4"
+=======
+"@types/node@^9.6.1":
+  version "9.6.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.2.tgz#e49ac1adb458835e95ca6487bc20f916b37aff23"
+>>>>>>> afca465624728e0fe005e8e45209c73d497249c4
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -559,8 +565,13 @@ tsutils@^2.12.1:
     tslib "^1.8.1"
 
 typescript@^2.8.1:
+<<<<<<< HEAD
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.8.3.tgz#5d817f9b6f31bb871835f4edf0089f21abe6c170"
+=======
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.8.1.tgz#6160e4f8f195d5ba81d4876f9c0cc1fbc0820624"
+>>>>>>> afca465624728e0fe005e8e45209c73d497249c4
 
 unique-string@^1.0.0:
   version "1.0.0"
@@ -572,9 +583,15 @@ unzip-response@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
 
+<<<<<<< HEAD
 update-notifier@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-2.5.0.tgz#d0744593e13f161e406acb1d9408b72cad08aff6"
+=======
+update-notifier@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-2.4.0.tgz#f9b4c700fbfd4ec12c811587258777d563d8c866"
+>>>>>>> afca465624728e0fe005e8e45209c73d497249c4
   dependencies:
     boxen "^1.2.1"
     chalk "^2.0.1"
