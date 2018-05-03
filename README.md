@@ -74,7 +74,7 @@ Options:
   -p, --pause                    pauses after execution
   -o, --output-charset <string>  ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]
   -P, --ppo                      preprocess to stdout/file
-  -S, --safe-ppo                 preprocess to stdout/file
+  -S, --safe-ppo                 safely preprocess to stdout/file
   -v, --verbose <n>              verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none
   -w, --wine                     use Wine to run makenis
   -x, --strict                   treat warnings as errors
