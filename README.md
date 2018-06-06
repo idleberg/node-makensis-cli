@@ -157,7 +157,7 @@ $ nsis demo.nsi --verbose 2
 ```
 ____
 
-Complie with strict settings, so our little `!warning` will be treated as an error.
+Compile with strict settings, so our little `!warning` will be treated as an error.
 
 ```sh
 $ nsis demo.nsi --verbose 2 --strict
