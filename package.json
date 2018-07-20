@@ -18,14 +18,14 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.15.1",
-    "makensis": "^0.12.6",
+    "commander": "^2.16.0",
+    "makensis": "^0.14.0",
     "update-notifier": "^2.5.0"
   },
   "devDependencies": {
-    "@types/node": "^10.0.3",
-    "tslint": "^5.9.1",
-    "typescript": "^2.8.1"
+    "@types/node": "^10.5.2",
+    "tslint": "^5.11.0",
+    "typescript": "^2.9.2"
   },
   "scripts": {
     "build": "tsc -p ./",
