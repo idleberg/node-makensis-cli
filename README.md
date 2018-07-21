@@ -51,7 +51,7 @@ Alternatively, you can setup NSIS in your [Wine](http://winehq.org/) environment
 
 ## Usage
 
-You can evoke this wrapper using `nsis` or, since Windows users already have `NSIS.exe` in the PATH, using the `mn` shorthand.
+You can evoke this wrapper using `mn` (for **m**ake**n**sis) or – if you're not on Windows – `nsis`.
 
 ### Sub-Commands
 
@@ -62,10 +62,10 @@ You can evoke this wrapper using `nsis` or, since Windows users already have `NS
 
 ### Options
 
-Running `nsis --help` lists all available options:
+Running `mn --help` lists all available options:
 
 ```
-Usage: nsis [command] [file.nsi] [options]
+Usage: mn [command] [file.nsi] [options]
 
 Options:
 
@@ -87,7 +87,7 @@ Options:
 Let's start with `makensis` returning its version
 
 ```sh
-$ nsis version
+$ mn version
 
 # Result:
 #
@@ -98,7 +98,7 @@ ____
 We can also return this as JSON
 
 ```sh
-$ nsis version --json
+$ mn version --json
 
 # Result:
 #
@@ -111,7 +111,7 @@ ____
 Try again for `makensis` on Wine
 
 ```sh
-$ nsis version --json --wine
+$ mn version --json --wine
 
 # Result:
 #
@@ -131,7 +131,7 @@ ____
 Compile the script
 
 ```sh
-$ nsis demo.nsi
+$ mn demo.nsi
 
 # Result (omitted):
 #
@@ -148,7 +148,7 @@ ____
 Compile again, but only display warnings and errors
 
 ```sh
-$ nsis demo.nsi --verbose 2
+$ mn demo.nsi --verbose 2
 
 # Result:
 #
@@ -158,10 +158,10 @@ $ nsis demo.nsi --verbose 2
 ```
 ____
 
-Complie with strict settings, so our little `!warning` will be treated as an error.
+Compile with strict settings, so our little `!warning` will be treated as an error.
 
 ```sh
-$ nsis demo.nsi --verbose 2 --strict
+$ mn demo.nsi --verbose 2 --strict
 
 # Result:
 #
@@ -173,7 +173,7 @@ ____
 Let's output the above as JSON
 
 ```sh
-$ nsis demo.nsi --verbose 2 --strict --json
+$ mn demo.nsi --verbose 2 --strict --json
 
 # Result:
 #
