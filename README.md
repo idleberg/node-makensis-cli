@@ -58,6 +58,7 @@ You can evoke this wrapper using `nsis` or, since Windows users already have `NS
 - `hdrinfo` – prints information about what options makensis was compiled with (Aliases: `f|flags|i|info`)
 - `version` – prints the makensis version and exits (Alias: `v`)
 - `cmdhelp [item]` – prints out help for 'item', or lists all commands
+- `nsisdir` – prints path of `${NSISDIR}`
 
 ### Options
 

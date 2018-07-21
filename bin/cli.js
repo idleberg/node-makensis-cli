@@ -56,6 +56,16 @@ var cmdhelp = function (command, options) {
         logError(output.stdout, options);
     });
 };
+var nsisdir = function (options) {
+    if (options === void 0) { options = {}; }
+    makensis.nsisDir(options)
+        .then(function (output) {
+        log(output, options);
+    }).catch(function (output) {
+        // fallback for NSIS < 3.03
+        logError(output, options);
+    });
+};
 var log = function (output, options) {
     if (options.json === true) {
         console.log(JSON.stringify(output, null, 2));
@@ -145,6 +155,9 @@ program
         case 'h':
         case 'help':
             program.help();
+            break;
+        case 'nsisdir':
+            nsisdir(options);
             break;
         default:
             if (path_1.extname(cmd) === '.nsi' || path_1.extname(cmd) === '.bnsi') {

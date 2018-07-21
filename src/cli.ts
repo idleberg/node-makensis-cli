@@ -56,6 +56,16 @@ const cmdhelp = (command: string = '', options: CompilerOptions = {}): void => {
   });
 };
 
+const nsisdir = (options: CompilerOptions = {}): void => {
+  makensis.nsisDir(options)
+  .then(output => {
+    log(output, options);
+  }).catch(output => {
+    // fallback for NSIS < 3.03
+    logError(output, options);
+  });
+};
+
 const log = (output, options): void => {
   if (options.json === true) {
     console.log(JSON.stringify(output, null, 2));
@@ -151,6 +161,9 @@ program
       case 'h':
       case 'help':
         program.help();
+        break;
+      case 'nsisdir':
+        nsisdir(options);
         break;
       default:
         if (extname(cmd) === '.nsi' || extname(cmd) === '.bnsi') {
