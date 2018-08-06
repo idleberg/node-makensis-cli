@@ -1,10 +1,10 @@
 # makensis-cli
 
-[![npm](https://img.shields.io/npm/l/makensis-cli.svg?style=flat-square)](https://www.npmjs.org/package/makensis-cli)
-[![npm](https://img.shields.io/npm/v/makensis-cli.svg?style=flat-square)](https://www.npmjs.org/package/makensis-cli)
-[![Travis](https://img.shields.io/travis/idleberg/node-makensis-cli.svg?style=flat-square)](https://travis-ci.org/idleberg/node-makensis-cli)
-[![David](https://img.shields.io/david/idleberg/node-makensis-cli.svg?style=flat-square)](https://david-dm.org/idleberg/node-makensis-cli)
-[![David](https://img.shields.io/david/dev/idleberg/node-makensis-cli.svg?style=flat-square)](https://david-dm.org/idleberg/node-makensis-cli?type=dev)
+[![npm](https://flat.badgen.net/npm/license/makensis-cli)](https://www.npmjs.org/package/makensis-cli)
+[![npm](https://flat.badgen.net/npm/v/makensis-cli)](https://www.npmjs.org/package/makensis-cli)
+[![Travis](https://flat.badgen.net/travis/idleberg/node-makensis-cli)](https://travis-ci.org/idleberg/node-makensis-cli)
+[![David](https://flat.badgen.net/david/dep/idleberg/node-makensis-cli)](https://david-dm.org/idleberg/node-makensis-cli)
+[![David](https://flat.badgen.net/david/dev/idleberg/node-makensis-cli)](https://david-dm.org/idleberg/node-makensis-cli?type=dev)
 
 CLI for the makensis wrapper on Node
 
