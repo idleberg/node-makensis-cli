@@ -156,11 +156,12 @@ program
         case 'help':
             program.help();
             break;
+        case 'dir':
         case 'nsisdir':
             nsisdir(options);
             break;
         default:
-            if (path_1.extname(cmd) === '.nsi' || path_1.extname(cmd) === '.bnsi') {
+            if (typeof cmd !== 'undefined' && (path_1.extname(cmd) === '.nsi' || path_1.extname(cmd) === '.bnsi')) {
                 compile(cmd, options);
                 break;
             }
