@@ -1,90 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var makensis = require("makensis");
+// Dependencies
+var program = require("commander");
 var path_1 = require("path");
-// Functions
-var compile = function (filePath, options) {
-    if (options === void 0) { options = {}; }
-    Object.assign(options, {});
-    makensis.compile(filePath, options)
-        .then(function (output) {
-        if (options.json === true) {
-            log(output, options);
-        }
-        else {
-            log(output.stdout, options);
-        }
-    }).catch(function (output) {
-        if (options.json === true) {
-            log(output, options);
-        }
-        else {
-            console.error("Exit Code " + output.status + "\n" + output.stderr);
-        }
-    });
-};
-var hdrinfo = function (options) {
-    if (options === void 0) { options = {}; }
-    Object.assign(options, { verbose: 0 });
-    makensis.hdrInfo(options)
-        .then(function (output) {
-        log(output.stdout, options);
-    }).catch(function (output) {
-        // fallback for NSIS < 3.03
-        logError(output.stdout, options);
-    });
-};
-var version = function (options) {
-    if (options === void 0) { options = {}; }
-    Object.assign(options, { verbose: 0 });
-    makensis.version(options)
-        .then(function (output) {
-        log(output.stdout, options);
-    }).catch(function (output) {
-        logError(output.stderr, options);
-    });
-};
-var cmdhelp = function (command, options) {
-    if (command === void 0) { command = ''; }
-    if (options === void 0) { options = {}; }
-    Object.assign(options, { verbose: 0 });
-    makensis.cmdHelp(command, options)
-        .then(function (output) {
-        log(output.stdout, options);
-    }).catch(function (output) {
-        // fallback for NSIS < 3.03
-        logError(output.stdout, options);
-    });
-};
-var nsisdir = function (options) {
-    if (options === void 0) { options = {}; }
-    makensis.nsisDir(options)
-        .then(function (output) {
-        log(output, options);
-    }).catch(function (output) {
-        // fallback for NSIS < 3.03
-        logError(output, options);
-    });
-};
-var log = function (output, options) {
-    if (options.json === true) {
-        console.log(JSON.stringify(output, null, 2));
-    }
-    else {
-        console.log(output);
-    }
-};
-var logError = function (output, options) {
-    if (options.json === true) {
-        console.error(JSON.stringify(output, null, 2));
-    }
-    else {
-        console.error(output);
-    }
-};
+var os_1 = require("os");
+// Local exports
 var meta = require('../package.json');
-var platform = require('os').platform;
-var program = require('commander');
+var commands_1 = require("./commands");
 var validInputs = [
     'ACP',
     'OEM',
@@ -119,7 +41,7 @@ program
     var strict = (typeof flags.strict === 'undefined') ? false : true;
     var verbose = (flags.verbose >= 0 && flags.verbose <= 4) ? flags.verbose : null;
     var wine = (typeof flags.wine === 'undefined') ? false : true;
-    if (platform() === 'win32' || wine === true) {
+    if (os_1.platform() === 'win32' || wine === true) {
         outputCharset = (typeof flags.outputCharset !== 'undefined') ? flags.outputCharset : '';
     }
     var options = {
@@ -141,16 +63,16 @@ program
         case 'hdrinfo':
         case 'i':
         case 'info':
-            hdrinfo(options);
+            commands_1.hdrinfo(options);
             break;
         case 'v':
         case 'version':
-            version(options);
+            commands_1.version(options);
             break;
         case 'cmdhelp':
         case 'help':
             filePath = (typeof filePath === 'undefined') ? '' : filePath;
-            cmdhelp(filePath, options);
+            commands_1.cmdhelp(filePath, options);
             break;
         case 'h':
         case 'help':
@@ -158,11 +80,15 @@ program
             break;
         case 'dir':
         case 'nsisdir':
-            nsisdir(options);
+            commands_1.nsisdir(options);
+            break;
+            break;
+        case 'license':
+            commands_1.license(options);
             break;
         default:
             if (typeof cmd !== 'undefined' && (path_1.extname(cmd) === '.nsi' || path_1.extname(cmd) === '.bnsi')) {
-                compile(cmd, options);
+                commands_1.compile(cmd, options);
                 break;
             }
             program.help();
