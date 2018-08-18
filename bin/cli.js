@@ -6,14 +6,8 @@ var path_1 = require("path");
 var os_1 = require("os");
 // Local exports
 var meta = require('../package.json');
+var charsets = require("./charsets");
 var commands_1 = require("./commands");
-var validInputs = [
-    'ACP',
-    'OEM',
-    'UTF8',
-    'UTF16BE',
-    'UTF16LE'
-];
 // Action
 program
     .version(meta.version)
@@ -30,10 +24,10 @@ program
     .option('-w, --wine', 'use Wine to run makenis')
     .option('-x, --strict', 'treat warnings as errors')
     .action(function (cmd, filePath, flags) {
-    var inputCharset = (typeof flags.inputCharset !== 'undefined' && (validInputs.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null)) ? flags.inputCharset : '';
+    var inputCharset = (typeof flags.inputCharset !== 'undefined' && charsets.input.indexOf(flags.inputCharset.toUpperCase()) !== -1) ? flags.inputCharset.toUpperCase() : '';
     var noCD = (typeof flags.nocd === 'undefined') ? false : true;
     var noConfig = (typeof flags.noconfig === 'undefined') ? false : true;
-    var outputCharset = '';
+    var outputCharset = (typeof flags.outputCharset !== 'undefined' && charsets.output.indexOf(flags.outputCharset.toUpperCase()) !== -1) ? flags.outputCharset.toUpperCase() : '';
     var pause = (typeof flags.pause === 'undefined') ? false : true;
     var ppo = (typeof flags.ppo === 'undefined') ? false : true;
     var json = (typeof flags.json === 'undefined') ? false : true;

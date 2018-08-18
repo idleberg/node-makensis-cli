@@ -5,6 +5,7 @@ import { platform } from 'os';
 
 // Local exports
 const meta = require('../package.json');
+import * as charsets from './charsets';
 import {
   cmdhelp,
   compile,
@@ -13,14 +14,6 @@ import {
   nsisdir,
   version
 } from './commands';
-
-const validInputs = [
-  'ACP',
-  'OEM',
-  'UTF8',
-  'UTF16BE',
-  'UTF16LE'
-];
 
 // Action
 program
@@ -39,10 +32,10 @@ program
   .option('-x, --strict', 'treat warnings as errors')
   .action(function(cmd, filePath, flags) {
 
-    let inputCharset = (typeof flags.inputCharset !== 'undefined' && (validInputs.indexOf(flags.inputCharset) !== -1 || flags.inputCharset.match(/CP\d+/) !== null)) ? flags.inputCharset : '';
+    let inputCharset = (typeof flags.inputCharset !== 'undefined' && charsets.input.indexOf(flags.inputCharset.toUpperCase()) !== -1) ? flags.inputCharset.toUpperCase() : '';
     let noCD = (typeof flags.nocd === 'undefined') ? false : true;
     let noConfig = (typeof flags.noconfig === 'undefined') ? false : true;
-    let outputCharset = '';
+    let outputCharset = (typeof flags.outputCharset !== 'undefined' && charsets.output.indexOf(flags.outputCharset.toUpperCase()) !== -1) ? flags.outputCharset.toUpperCase() : '';
     let pause = (typeof flags.pause === 'undefined') ? false : true;
     let ppo = (typeof flags.ppo === 'undefined') ? false : true;
     let json = (typeof flags.json === 'undefined') ? false : true;
