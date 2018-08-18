@@ -16,7 +16,7 @@ Admittedly, there are only few reasons why you would want to use a wrapper for a
 
 - seamless [Wine](http://winehq.org/) integration
 - Unix-like command-line parameters
-- normalized output across NSIS versions
+- normalized output across different NSIS versions
 - optional JSON output
 
 **Cons:**
