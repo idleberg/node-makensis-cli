@@ -78,11 +78,13 @@ program
         case 'help':
             program.help();
             break;
+        case 'd':
         case 'dir':
         case 'nsisdir':
             commands_1.nsisdir(options);
             break;
             break;
+        case 'l':
         case 'license':
             commands_1.license(options);
             break;
