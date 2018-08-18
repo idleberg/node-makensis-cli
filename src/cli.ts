@@ -90,11 +90,13 @@ program
       case 'help':
         program.help();
         break;
+      case 'd':
       case 'dir':
       case 'nsisdir':
         nsisdir(options);
         break;
         break;
+      case 'l':
       case 'license':
         license(options);
         break;
