@@ -2,7 +2,7 @@
 
 [![npm](https://flat.badgen.net/npm/license/makensis-cli)](https://www.npmjs.org/package/makensis-cli)
 [![npm](https://flat.badgen.net/npm/v/makensis-cli)](https://www.npmjs.org/package/makensis-cli)
-[![Travis](https://flat.badgen.net/travis/idleberg/node-makensis-cli)](https://travis-ci.org/idleberg/node-makensis-cli)
+[![CircleCI](https://flat.badgen.net/circleci/github/idleberg/node-makensis-cli)](https://circleci.com/gh/idleberg/node-makensis-cli)
 [![David](https://flat.badgen.net/david/dep/idleberg/node-makensis-cli)](https://david-dm.org/idleberg/node-makensis-cli)
 [![David](https://flat.badgen.net/david/dev/idleberg/node-makensis-cli)](https://david-dm.org/idleberg/node-makensis-cli?type=dev)
 
