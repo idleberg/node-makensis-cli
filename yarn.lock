@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@types/node@^10.7.1":
-  version "10.7.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
+"@types/node@^10.11.0":
+  version "10.11.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.0.tgz#ddd0d67a3b6c3810dd1a59e36675fa82de5e19ae"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -119,9 +119,9 @@ commander@^2.12.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
 
-commander@^2.17.1:
-  version "2.17.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
+commander@^2.18.0:
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.18.0.tgz#2bf063ddee7c7891176981a2cc798e5754bc6970"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -357,9 +357,9 @@ make-dir@^1.0.0:
   dependencies:
     pify "^3.0.0"
 
-makensis@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/makensis/-/makensis-0.15.0.tgz#6dbba96b595461bf7bd86240df2f368819a8d1ee"
+makensis@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/makensis/-/makensis-0.16.0.tgz#3da12390732331ec3c0e55621b5e795556bbff51"
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -558,9 +558,9 @@ tsutils@^2.27.2:
   dependencies:
     tslib "^1.8.1"
 
-typescript@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.1.tgz#43738f29585d3a87575520a4b93ab6026ef11fdb"
+typescript@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.3.tgz#4853b3e275ecdaa27f78fda46dc273a7eb7fc1c8"
 
 unique-string@^1.0.0:
   version "1.0.0"
