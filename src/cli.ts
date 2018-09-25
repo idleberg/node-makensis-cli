@@ -23,10 +23,11 @@ program
   .usage('[command] [file.nsi] [options]')
   .option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>')
   .option('-j, --json', 'prints output as JSON')
-  .option('-p, --pause', 'pauses after execution')
+  .option('-W, --pause', 'pauses after execution')
   .option('-o, --output-charset <string>', 'ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]')
   .option('-P, --ppo', 'preprocess to stdout/file')
   .option('-S, --safe-ppo', 'safely preprocess to stdout/file')
+  .option('-p, --priority <n>', 'process priority, where n is 5=realtime,4=high,3=above normal,2=normal,1=below normal,0=idle', parseInt)
   .option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt)
   .option('-w, --wine', 'use Wine to run makenis')
   .option('-x, --strict', 'treat warnings as errors')
@@ -38,6 +39,7 @@ program
     let outputCharset = (typeof flags.outputCharset !== 'undefined' && charsets.output.indexOf(flags.outputCharset.toUpperCase()) !== -1) ? flags.outputCharset.toUpperCase() : '';
     let pause = (typeof flags.pause === 'undefined') ? false : true;
     let ppo = (typeof flags.ppo === 'undefined') ? false : true;
+    let priority = (flags.priority >= 0 && flags.priority <= 5) ? flags.priority : null;
     let json = (typeof flags.json === 'undefined') ? false : true;
     let safePPO = (typeof flags.safePpo === 'undefined') ? false : true;
     let strict = (typeof flags.strict === 'undefined') ? false : true;
@@ -57,6 +59,7 @@ program
       'pause': pause,
       'ppo': ppo,
       'safePPO': safePPO,
+      'priority': priority,
       'strict': strict,
       'verbose': verbose,
       'wine': wine
