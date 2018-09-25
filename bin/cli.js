@@ -39,6 +39,7 @@ program
     var wine = (typeof flags.wine === 'undefined') ? false : true;
     if (os_1.platform() === 'win32' || wine === true) {
         outputCharset = (typeof flags.outputCharset !== 'undefined') ? flags.outputCharset : '';
+        outputCharset = (typeof flags.priority !== 'undefined') ? flags.priority : '';
     }
     var options = {
         'inputCharset': inputCharset,

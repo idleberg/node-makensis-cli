@@ -48,6 +48,7 @@ program
 
     if (platform() === 'win32' || wine === true) {
       outputCharset = (typeof flags.outputCharset !== 'undefined') ? flags.outputCharset : '';
+      outputCharset = (typeof flags.priority !== 'undefined') ? flags.priority : '';
     }
 
     const options = {
