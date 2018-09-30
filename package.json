@@ -18,6 +18,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@nsis/language-data": "^0.5.0",
     "commander": "^2.18.0",
     "makensis": "^0.16.0",
     "update-notifier": "^2.5.0"

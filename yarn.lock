@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@nsis/language-data@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@nsis/language-data/-/language-data-0.5.0.tgz#2725bc8561170c49730de28308f4df966a445077"
+
 "@types/node@^10.11.0":
   version "10.11.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.0.tgz#ddd0d67a3b6c3810dd1a59e36675fa82de5e19ae"
