@@ -6,9 +6,9 @@
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@nsis/language-data/-/language-data-0.5.0.tgz#2725bc8561170c49730de28308f4df966a445077"
 
-"@types/node@^10.11.0":
-  version "10.11.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.0.tgz#ddd0d67a3b6c3810dd1a59e36675fa82de5e19ae"
+"@types/node@^10.11.3":
+  version "10.11.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.3.tgz#c055536ac8a5e871701aa01914be5731539d01ee"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -361,9 +361,11 @@ make-dir@^1.0.0:
   dependencies:
     pify "^3.0.0"
 
-makensis@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/makensis/-/makensis-0.16.0.tgz#3da12390732331ec3c0e55621b5e795556bbff51"
+makensis@^0.16.3:
+  version "0.16.3"
+  resolved "https://registry.yarnpkg.com/makensis/-/makensis-0.16.3.tgz#639d95ffe609172961b90b390b3e463e4ad1f9cd"
+  dependencies:
+    "@nsis/language-data" "^0.5.0"
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -562,9 +564,9 @@ tsutils@^2.27.2:
   dependencies:
     tslib "^1.8.1"
 
-typescript@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.3.tgz#4853b3e275ecdaa27f78fda46dc273a7eb7fc1c8"
+typescript@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.1.tgz#3362ba9dd1e482ebb2355b02dfe8bcd19a2c7c96"
 
 unique-string@^1.0.0:
   version "1.0.0"
