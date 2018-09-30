@@ -5,7 +5,7 @@ import { platform } from 'os';
 
 // Local exports
 const meta = require('../package.json');
-import * as charsets from './charsets';
+import { input as inputCharsets, output as outputCharsets } from './charsets';
 import {
   cmdhelp,
   compile,
@@ -33,10 +33,10 @@ program
   .option('-x, --strict', 'treat warnings as errors')
   .action(function(cmd, filePath, flags) {
 
-    let inputCharset = (typeof flags.inputCharset !== 'undefined' && charsets.input.indexOf(flags.inputCharset.toUpperCase()) !== -1) ? flags.inputCharset.toUpperCase() : '';
+    let inputCharset = (typeof flags.inputCharset !== 'undefined' && inputCharsets.includes(flags.inputCharset.toUpperCase())) ? flags.inputCharset.toUpperCase() : '';
     let noCD = (typeof flags.nocd === 'undefined') ? false : true;
     let noConfig = (typeof flags.noconfig === 'undefined') ? false : true;
-    let outputCharset = (typeof flags.outputCharset !== 'undefined' && charsets.output.indexOf(flags.outputCharset.toUpperCase()) !== -1) ? flags.outputCharset.toUpperCase() : '';
+    let outputCharset = (typeof flags.outputCharset !== 'undefined' && outputCharsets.includes(flags.outputCharset.toUpperCase())) ? flags.outputCharset.toUpperCase() : '';
     let pause = (typeof flags.pause === 'undefined') ? false : true;
     let ppo = (typeof flags.ppo === 'undefined') ? false : true;
     let priority = (flags.priority >= 0 && flags.priority <= 5) ? flags.priority : null;
