@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "tsc -p ./",
-    "prepush": "tslint --project . && npm run build",
+    "prepublishOnly": "tslint --project . && npm run build",
     "test": "tslint --project ."
   }
 }
