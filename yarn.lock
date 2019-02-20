@@ -2,13 +2,20 @@
 # yarn lockfile v1
 
 
-"@nsis/language-data@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@nsis/language-data/-/language-data-0.5.0.tgz#2725bc8561170c49730de28308f4df966a445077"
+"@nsis/language-data@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@nsis/language-data/-/language-data-0.5.1.tgz#5dbf18aa17381bc2a16d5e4c52272b1aa052f2bb"
+  integrity sha512-rsbghvYNfVTmbTSHlMqF8kpG70mUlJTg6IiUf9IBAqidCyC19vlsYQXShrzPUeRqPP2GiXnIQPjDJ+Z7H0TTyw==
 
-"@types/node@^10.11.3":
-  version "10.11.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.3.tgz#c055536ac8a5e871701aa01914be5731539d01ee"
+"@nsis/language-data@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@nsis/language-data/-/language-data-0.6.0.tgz#6a03f78a6dc5fdd626898aaedfe7c48084e1e3b9"
+  integrity sha512-QN3K31TAiY0nw0qFiIHd2+ZPTfFajd29x2JwVAvCf7M3ZHdUVl/S/lHACpCQdUmqeAhXLLEIRTas+1m2Fp9svg==
+
+"@types/node@^10.12.26":
+  version "10.12.26"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.26.tgz#2dec19f1f7981c95cb54bab8f618ecb5dc983d0e"
+  integrity sha512-nMRqS+mL1TOnIJrL6LKJcNZPB8V3eTfRo9FQA2b5gDvrHurC8XbSA86KNe0dShlEL7ReWJv/OU9NL7Z0dnqWTg==
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -123,9 +130,10 @@ commander@^2.12.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
 
-commander@^2.18.0:
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.18.0.tgz#2bf063ddee7c7891176981a2cc798e5754bc6970"
+commander@^2.19.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
+  integrity sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -361,11 +369,12 @@ make-dir@^1.0.0:
   dependencies:
     pify "^3.0.0"
 
-makensis@^0.16.3:
-  version "0.16.3"
-  resolved "https://registry.yarnpkg.com/makensis/-/makensis-0.16.3.tgz#639d95ffe609172961b90b390b3e463e4ad1f9cd"
+makensis@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/makensis/-/makensis-0.17.0.tgz#7231b0b490dc800e06974246aa4692210dd79bfb"
+  integrity sha512-tzNcjuYvhE+MWD3X0S5to7ufyRmzcCV70/h65mT7voeIINnQEJuzVOUh9pjBBX+WfhoiLmb3xAJS98EbDHgoUQ==
   dependencies:
-    "@nsis/language-data" "^0.5.0"
+    "@nsis/language-data" "^0.5.1"
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -541,9 +550,10 @@ tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
-tslint@^5.11.0:
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.11.0.tgz#98f30c02eae3cde7006201e4c33cb08b48581eed"
+tslint@^5.12.1:
+  version "5.12.1"
+  resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.12.1.tgz#8cec9d454cf8a1de9b0a26d7bdbad6de362e52c1"
+  integrity sha512-sfodBHOucFg6egff8d1BvuofoOQ/nOeYNfbp7LDlKBcLNrL3lmS5zoiDGyOMdT7YsEXAwWpTdAHwOGOc8eRZAw==
   dependencies:
     babel-code-frame "^6.22.0"
     builtin-modules "^1.1.1"
@@ -564,9 +574,10 @@ tsutils@^2.27.2:
   dependencies:
     tslib "^1.8.1"
 
-typescript@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.1.tgz#3362ba9dd1e482ebb2355b02dfe8bcd19a2c7c96"
+typescript@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.3.tgz#f1657fc7daa27e1a8930758ace9ae8da31403221"
+  integrity sha512-Y21Xqe54TBVp+VDSNbuDYdGw0BpoR/Q6wo/+35M8PAU0vipahnyduJWirxxdxjsAkS7hue53x2zp8gz7F05u0A==
 
 unique-string@^1.0.0:
   version "1.0.0"

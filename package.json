@@ -1,6 +1,6 @@
 {
   "name": "makensis-cli",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "CLI for the makensis wrapper on Node, compiles NSIS scripts",
   "main": "index.js",
   "bin": {
@@ -18,21 +18,20 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@nsis/language-data": "^0.5.0",
-    "@nsis/nlf-cli": "^0.4.1",
-    "commander": "^2.18.0",
-    "makensis": "^0.16.3",
+    "@nsis/language-data": "^0.6.0",
+    "commander": "^2.19.0",
+    "makensis": "^0.17.0",
     "update-notifier": "^2.5.0"
   },
   "devDependencies": {
-    "@types/node": "^10.11.3",
-    "tslint": "^5.11.0",
-    "typescript": "^3.1.1"
+    "@types/node": "^10.12.26",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
   },
   "scripts": {
     "build": "tsc --pretty --project ./",
     "dev": "tsc --watch --pretty --project ./",
-    "prepublish": "tslint --project . && npm run build",
+    "prepublishOnly": "tslint --project . && npm run build",
     "test": "tslint --project ."
   }
 }
