@@ -75,11 +75,12 @@ You can evoke this wrapper using `mn` (for **m**ake**n**sis) or – if you're no
 
 ### Sub-Commands
 
-- `hdrinfo` – prints information about what options makensis was compiled with (Aliases: `f|flags|i|info`)
-- `version` – prints the makensis version and exits (Alias: `v`)
-- `license` – prints the makensis software license exits (Alias: `l`)
+- `hdrinfo` – prints information about what options makensis was compiled with (Aliases: `flags|info`)
+- `version` – prints the makensis version and exits
+- `license` – prints the makensis software license exits
 - `cmdhelp [item]` – prints out help for 'item', or lists all commands
-- `nsisdir` – prints path of `${NSISDIR}` (Aliases: `d|dir`)
+- `nsisdir` – prints path of `${NSISDIR}` (Aliases: `dir`)
+- `scaffold` – scaffold a new NSIS script in the current working directory (Aliases: `new`)
 
 ### Options
 
