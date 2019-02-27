@@ -12,6 +12,7 @@ import {
   hdrinfo,
   license,
   nsisdir,
+  scaffold,
   version
 } from './commands';
 
@@ -67,14 +68,11 @@ program
     };
 
     switch (cmd) {
-      case 'f':
       case 'flags':
       case 'hdrinfo':
-      case 'i':
       case 'info':
         hdrinfo(options);
         break;
-      case 'v':
       case 'version':
         version(options);
         break;
@@ -83,19 +81,19 @@ program
         filePath = (typeof filePath === 'undefined') ? '' : filePath;
         cmdhelp(filePath, options);
         break;
-      case 'h':
       case 'help':
         program.help();
         break;
-      case 'd':
       case 'dir':
       case 'nsisdir':
         nsisdir(options);
         break;
-        break;
-      case 'l':
       case 'license':
         license(options);
+        break;
+      case 'new':
+      case 'scaffold':
+        scaffold();
         break;
       default:
         if (typeof cmd !== 'undefined' && (extname(cmd) === '.nsi' || extname(cmd) === '.bnsi')) {

@@ -1,4 +1,5 @@
 import * as makensis from 'makensis';
+import * as yeoman from 'yeoman-environment';
 
 // Exports
 const cmdhelp = (command: string = '', options: CompilerOptions = {}): void => {
@@ -65,6 +66,13 @@ const nsisdir = (options: CompilerOptions = {}): void => {
   });
 };
 
+const scaffold = (): void => {
+  const env = yeoman.createEnv();
+
+  env.register(require.resolve('generator-nsis'), 'nsis:app');
+  env.run('nsis:app');
+};
+
 const version = (options: CompilerOptions = {}): void => {
   Object.assign(options, { verbose: 0 });
 
@@ -82,6 +90,7 @@ export {
   hdrinfo,
   license,
   nsisdir,
+  scaffold,
   version
 };
 

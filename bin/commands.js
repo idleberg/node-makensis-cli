@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var makensis = require("makensis");
+var yeoman = require("yeoman-environment");
 // Exports
 var cmdhelp = function (command, options) {
     if (command === void 0) { command = ''; }
@@ -70,6 +71,12 @@ var nsisdir = function (options) {
     });
 };
 exports.nsisdir = nsisdir;
+var scaffold = function () {
+    var env = yeoman.createEnv();
+    env.register(require.resolve('generator-nsis'), 'nsis:app');
+    env.run('nsis:app');
+};
+exports.scaffold = scaffold;
 var version = function (options) {
     if (options === void 0) { options = {}; }
     Object.assign(options, { verbose: 0 });

@@ -56,14 +56,11 @@ program
         'wine': wine
     };
     switch (cmd) {
-        case 'f':
         case 'flags':
         case 'hdrinfo':
-        case 'i':
         case 'info':
             commands_1.hdrinfo(options);
             break;
-        case 'v':
         case 'version':
             commands_1.version(options);
             break;
@@ -72,19 +69,19 @@ program
             filePath = (typeof filePath === 'undefined') ? '' : filePath;
             commands_1.cmdhelp(filePath, options);
             break;
-        case 'h':
         case 'help':
             program.help();
             break;
-        case 'd':
         case 'dir':
         case 'nsisdir':
             commands_1.nsisdir(options);
             break;
-            break;
-        case 'l':
         case 'license':
             commands_1.license(options);
+            break;
+        case 'new':
+        case 'scaffold':
+            commands_1.scaffold();
             break;
         default:
             if (typeof cmd !== 'undefined' && (path_1.extname(cmd) === '.nsi' || path_1.extname(cmd) === '.bnsi')) {
