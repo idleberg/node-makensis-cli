@@ -20,14 +20,14 @@
   "dependencies": {
     "@nsis/language-data": "^0.6.0",
     "commander": "^2.19.0",
-    "generator-nsis": "^0.7.1",
+    "generator-nsis": "^0.8.0",
     "makensis": "^0.17.0",
     "update-notifier": "^2.5.0",
     "yeoman-environment": "^2.3.4"
   },
   "devDependencies": {
-    "@types/node": "^11.9.5",
-    "tslint": "^5.13.0",
+    "@types/node": "^11.10.4",
+    "tslint": "^5.13.1",
     "typescript": "^3.3.3333"
   },
   "scripts": {
