@@ -1,96 +1,16 @@
+#!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// Dependencies
 var program = require("commander");
-var path_1 = require("path");
-var os_1 = require("os");
-// Local exports
-var meta = require('../package.json');
-var charsets_1 = require("./charsets");
-var commands_1 = require("./commands");
 // Action
 program
-    .version(meta.version)
+    .version(require('../package.json').version)
     .description('CLI version of node-makensis')
-    .arguments('[command] [file.nsi]')
-    .usage('[command] [file.nsi] [options]')
-    .option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>')
-    .option('-j, --json', 'prints output as JSON')
-    .option('-W, --pause', 'pauses after execution')
-    .option('-o, --output-charset <string>', 'ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]')
-    .option('-P, --ppo', 'preprocess to stdout/file')
-    .option('-S, --safe-ppo', 'safely preprocess to stdout/file')
-    .option('-p, --priority <n>', 'process priority, where n is 5=realtime,4=high,3=above normal,2=normal,1=below normal,0=idle', parseInt)
-    .option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt)
-    .option('-w, --wine', 'use Wine to run makenis')
-    .option('-x, --strict', 'treat warnings as errors')
-    .action(function (cmd, filePath, flags) {
-    var inputCharset = (typeof flags.inputCharset !== 'undefined' && charsets_1.input.includes(flags.inputCharset.toUpperCase())) ? flags.inputCharset.toUpperCase() : '';
-    var noCD = (typeof flags.nocd === 'undefined') ? false : true;
-    var noConfig = (typeof flags.noconfig === 'undefined') ? false : true;
-    var outputCharset = (typeof flags.outputCharset !== 'undefined' && charsets_1.output.includes(flags.outputCharset.toUpperCase())) ? flags.outputCharset.toUpperCase() : '';
-    var pause = (typeof flags.pause === 'undefined') ? false : true;
-    var ppo = (typeof flags.ppo === 'undefined') ? false : true;
-    var priority = (flags.priority >= 0 && flags.priority <= 5) ? flags.priority : null;
-    var json = (typeof flags.json === 'undefined') ? false : true;
-    var safePPO = (typeof flags.safePpo === 'undefined') ? false : true;
-    var strict = (typeof flags.strict === 'undefined') ? false : true;
-    var verbose = (flags.verbose >= 0 && flags.verbose <= 4) ? flags.verbose : null;
-    var wine = (typeof flags.wine === 'undefined') ? false : true;
-    if (os_1.platform() === 'win32' || wine === true) {
-        outputCharset = (typeof flags.outputCharset !== 'undefined') ? flags.outputCharset : '';
-        outputCharset = (typeof flags.priority !== 'undefined') ? flags.priority : '';
-    }
-    var options = {
-        'inputCharset': inputCharset,
-        'json': json,
-        'noCD': noCD,
-        'noConfig': noConfig,
-        'outputCharset': outputCharset,
-        'pause': pause,
-        'ppo': ppo,
-        'safePPO': safePPO,
-        'priority': priority,
-        'strict': strict,
-        'verbose': verbose,
-        'wine': wine
-    };
-    switch (cmd) {
-        case 'flags':
-        case 'hdrinfo':
-        case 'info':
-            commands_1.hdrinfo(options);
-            break;
-        case 'version':
-            commands_1.version(options);
-            break;
-        case 'cmdhelp':
-        case 'help':
-            filePath = (typeof filePath === 'undefined') ? '' : filePath;
-            commands_1.cmdhelp(filePath, options);
-            break;
-        case 'help':
-            program.help();
-            break;
-        case 'dir':
-        case 'nsisdir':
-            commands_1.nsisdir(options);
-            break;
-        case 'license':
-            commands_1.license(options);
-            break;
-        case 'new':
-        case 'scaffold':
-            commands_1.scaffold();
-            break;
-        default:
-            if (typeof cmd !== 'undefined' && (path_1.extname(cmd) === '.nsi' || path_1.extname(cmd) === '.bnsi')) {
-                commands_1.compile(cmd, options);
-                break;
-            }
-            program.help();
-    }
-})
+    .command('hdrinfo', 'Print compilation flags').alias('flags')
+    .command('compile <script>', 'Import repository', { isDefault: true })
+    .command('version [options]', 'Import repository')
+    .command('cmdhelp [options]', 'Import repository').alias('help')
+    .command('license [options]', 'Import repository')
+    .command('nsisdir', 'Import repository').alias('dir')
+    .command('scaffold', 'Import repository').alias('new')
     .parse(process.argv);
-if (program.args.length === 0)
-    program.help();
