@@ -26,8 +26,8 @@
     "yeoman-environment": "^2.3.4"
   },
   "devDependencies": {
-    "@types/node": "^11.10.4",
-    "tslint": "^5.13.1",
+    "@types/node": "^11.11.3",
+    "tslint": "^5.14.0",
     "typescript": "^3.3.3333"
   },
   "scripts": {
