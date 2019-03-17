@@ -5,6 +5,7 @@ var program = require("commander");
 var commands_1 = require("./commands");
 // Action
 program
+    .usage('[command] [options]')
     .option('-j, --json', 'prints output as JSON')
     .option('-w, --wine', 'use Wine to run makenis')
     .parse(process.argv);

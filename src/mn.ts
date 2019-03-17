@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 
+import * as pkg from '../package.json';
 import * as program from 'commander';
+import * as updateNotifier from 'update-notifier';
 
 // Action
+updateNotifier({pkg}).notify();
+
 program
   .version(require('../package.json').version)
+  .usage('[sub-command] [script] [options]')
   .description('CLI version of node-makensis')
   .command('hdrinfo', 'Print compilation flags').alias('flags')
   .command('compile <script>', 'Compiles script(s)', {isDefault: true})
@@ -14,3 +19,5 @@ program
   .command('nsisdir', 'Prints NSIS installation folder').alias('dir')
   .command('scaffold', 'Creates custom made NSIS script').alias('new')
   .parse(process.argv);
+
+

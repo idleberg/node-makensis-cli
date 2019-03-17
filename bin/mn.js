@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var pkg = require("../package.json");
 var program = require("commander");
+var updateNotifier = require("update-notifier");
 // Action
+updateNotifier({ pkg: pkg }).notify();
 program
     .version(require('../package.json').version)
+    .usage('[sub-command] [script] [options]')
     .description('CLI version of node-makensis')
     .command('hdrinfo', 'Print compilation flags').alias('flags')
     .command('compile <script>', 'Compiles script(s)', { isDefault: true })

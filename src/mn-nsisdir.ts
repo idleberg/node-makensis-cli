@@ -5,6 +5,7 @@ import { nsisdir } from './commands';
 
 // Action
 program
+  .usage('[options]')
   .option('-j, --json', 'prints output as JSON')
   .option('-w, --wine', 'use Wine to run makenis')
   .parse(process.argv);

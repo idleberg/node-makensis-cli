@@ -7,6 +7,7 @@ import { input as inputCharsets, output as outputCharsets } from './charsets';
 
 // Action
 program
+  .usage('[script(s)] [options]')
   .option('-i, --input-charset <string>', 'ACP|OEM|CP#|UTF8|UTF16<LE|BE>')
   .option('-j, --json', 'prints output as JSON')
   .option('-W, --pause', 'pauses after execution')
