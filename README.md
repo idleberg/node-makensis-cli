@@ -75,7 +75,7 @@ You can evoke this wrapper using `mn` (for **m**ake**n**sis) or – if you're no
 
 ### Sub-Commands
 
-- `hdrinfo` – prints information about what options makensis was compiled with (Aliases: `flags|info`)
+- `hdrinfo` – prints information about what options makensis was compiled with (Aliases: `flags`)
 - `version` – prints the makensis version and exits
 - `license` – prints the makensis software license exits
 - `cmdhelp [item]` – prints out help for 'item', or lists all commands
