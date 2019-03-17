@@ -71,7 +71,7 @@ You can setup NSIS in your [Wine](http://winehq.org/) environment, but keep in m
 
 ## Usage
 
-You can evoke this wrapper using `mn` (for **m**ake**n**sis) or – if you're not on Windows – `nsis`.
+You can evoke this wrapper using `mn` (for **m**ake**n**sis).
 
 ### Sub-Commands
 
