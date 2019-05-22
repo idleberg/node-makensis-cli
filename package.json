@@ -17,17 +17,17 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@nsis/language-data": "^0.6.0",
-    "commander": "^2.19.0",
-    "generator-nsis": "^0.8.0",
+    "@nsis/language-data": "^0.7.1",
+    "commander": "^2.20.0",
+    "generator-nsis": "^0.8.1",
     "makensis": "^0.17.0",
-    "update-notifier": "^2.5.0",
+    "update-notifier": "^3.0.0",
     "yeoman-environment": "^2.3.4"
   },
   "devDependencies": {
     "@types/node": "^11.11.3",
-    "tslint": "^5.14.0",
-    "typescript": "^3.3.3333"
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   },
   "scripts": {
     "build": "tsc --pretty --project ./",
