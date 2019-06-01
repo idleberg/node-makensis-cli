@@ -11,3 +11,8 @@ types/
 gulpfile.js
 tsconfig.json
 tslint.json
+
+# project specific
+*.exe
+test.*
+todo.md
