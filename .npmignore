@@ -1,18 +1,31 @@
-# Folders
+# dependencies
+bower_components/
+node_modules/
+vendor/
+
+# package manager files
+npm-debug.log*
+yarn-error.log
+shrinkwrap.yaml
+
+# development
 .circleci/
+.editorconfig
 src/
 test/
 types/
+tsconfig.tsbuildinfo
 
-# Files
-.editorconfig
+# project specific
+*.exe
+*.nsi
+test.js
+test.ts
+todo.md
+
+# files
 .gitignore
 .travis.yml
 gulpfile.js
 tsconfig.json
 tslint.json
-
-# project specific
-*.exe
-test.*
-todo.md

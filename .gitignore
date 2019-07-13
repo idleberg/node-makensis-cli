@@ -6,8 +6,14 @@ vendor/
 # package manager files
 npm-debug.log*
 yarn-error.log
+shrinkwrap.yaml
+
+# development
+tsconfig.tsbuildinfo
 
 # project specific
 *.exe
-test.*
+*.nsi
+test.js
+test.ts
 todo.md
