@@ -1,7 +1,7 @@
 {
   "name": "makensis-cli",
   "version": "0.12.2",
-  "description": "CLI for the makensis wrapper on Node, compiles NSIS scripts",
+  "description": "CLI for the Node.js makensis wrapper, compiles NSIS scripts",
   "main": "./bin/mn.js",
   "bin": {
     "mn": "./bin/mn.js"
