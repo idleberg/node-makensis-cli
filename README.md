@@ -5,7 +5,7 @@
 [![CircleCI](https://flat.badgen.net/circleci/github/idleberg/node-makensis-cli)](https://circleci.com/gh/idleberg/node-makensis-cli)
 [![David](https://flat.badgen.net/david/dep/idleberg/node-makensis-cli)](https://david-dm.org/idleberg/node-makensis-cli)
 
-CLI for the makensis wrapper on Node
+CLI for the Node.js makensis wrapper
 
 ## Why?
 
