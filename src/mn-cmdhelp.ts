@@ -7,7 +7,7 @@ import { cmdhelp } from './commands';
 program
   .usage('[command] [options]')
   .option('-j, --json', 'prints output as JSON')
-  .option('-w, --wine', 'use Wine to run makenis')
+  .option('-w, --wine', 'use Wine to run makensis')
   .parse(process.argv);
 
 const options = {

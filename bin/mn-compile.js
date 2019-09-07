@@ -16,7 +16,7 @@ program
     .option('-S, --safe-ppo', 'safely preprocess to stdout/file')
     .option('-p, --priority <n>', 'process priority, where n is 5=realtime,4=high,3=above normal,2=normal,1=below normal,0=idle', parseInt)
     .option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt)
-    .option('-w, --wine', 'use Wine to run makenis')
+    .option('-w, --wine', 'use Wine to run makensis')
     .option('-x, --strict', 'treat warnings as errors')
     .parse(process.argv);
 var inputCharset = (typeof program.inputCharset !== 'undefined' && charsets_1.input.includes(program.inputCharset.toUpperCase())) ? program.inputCharset.toUpperCase() : '';

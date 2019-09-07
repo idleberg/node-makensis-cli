@@ -7,7 +7,7 @@ import { nsisdir } from './commands';
 program
   .usage('[options]')
   .option('-j, --json', 'prints output as JSON')
-  .option('-w, --wine', 'use Wine to run makenis')
+  .option('-w, --wine', 'use Wine to run makensis')
   .parse(process.argv);
 
 const options = {
