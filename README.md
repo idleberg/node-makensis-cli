@@ -99,7 +99,7 @@ Options:
   -S, --safe-ppo                 safely preprocess to stdout/file
   -p, --priority <n>             process priority, where n is 5=realtime,4=high,3=above normal,2=normal,1=below normal,0=idle
   -v, --verbose <n>              verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none
-  -w, --wine                     use Wine to run makenis
+  -w, --wine                     use Wine to run makensis
   -x, --strict                   treat warnings as errors
   -h, --help                     output usage information
 ```
