@@ -35,6 +35,7 @@
     "build": "tsc --pretty --project ./",
     "dev": "tsc --watch --pretty --project ./",
     "lint": "tslint --project .",
+    "lint:fix": "tslint --fix --project .",
     "prepublishOnly": "tslint --project . && npm run build",
     "test": "npm run lint"
   },
