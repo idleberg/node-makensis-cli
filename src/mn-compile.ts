@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import * as program from 'commander';
+import * as getStdin from 'get-stdin';
 import { compile } from './commands';
 import { platform } from 'os';
 import { input as inputCharsets, output as outputCharsets } from './charsets';
@@ -53,10 +54,21 @@ const options = {
   'wine': wine
 };
 
-if (program.args.length) {
+(async () => {
+  if (program.args.length) {
   program.args.forEach(scriptFile => {
     compile(scriptFile, options);
   });
 } else {
-  program.help();
+  const stdin = await getStdin();
+
+  if (stdin) {
+    options['preExecute'] = stdin;
+    compile('', options);
+  } else {
+    program.help();
+  }
 }
+})();
+
+
