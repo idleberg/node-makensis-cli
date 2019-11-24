@@ -42,6 +42,15 @@ var getStdin = require("get-stdin");
 var commands_1 = require("./commands");
 var os_1 = require("os");
 var charsets_1 = require("./charsets");
+function parseCommands(value, dummyPrevious) {
+    var trimmedValue = value.trim();
+    try {
+        return JSON.parse(trimmedValue);
+    }
+    catch (e) {
+        return trimmedValue;
+    }
+}
 // Action
 program
     .usage('[script(s)] [options]')
@@ -51,23 +60,25 @@ program
     .option('-o, --output-charset <string>', 'ACP|OEM|CP#|UTF8[SIG]|UTF16<LE|BE>[BOM]')
     .option('-P, --ppo', 'preprocess to stdout/file')
     .option('-S, --safe-ppo', 'safely preprocess to stdout/file')
+    .option('-b, --pre-execute <string>', 'executes script-commands before script', parseCommands)
+    .option('-a, --post-execute <string>', 'executes script-commands after script', parseCommands)
     .option('-p, --priority <n>', 'process priority, where n is 5=realtime,4=high,3=above normal,2=normal,1=below normal,0=idle', parseInt)
     .option('-v, --verbose <n>', 'verbosity where n is 4=all,3=no script,2=no info,1=no warnings,0=none', parseInt)
     .option('-w, --wine', 'use Wine to run makensis')
     .option('-x, --strict', 'treat warnings as errors')
     .parse(process.argv);
 var inputCharset = (typeof program.inputCharset !== 'undefined' && charsets_1.input.includes(program.inputCharset.toUpperCase())) ? program.inputCharset.toUpperCase() : '';
+var json = (typeof program.json === 'undefined') ? false : true;
 var noCD = (typeof program.nocd === 'undefined') ? false : true;
 var noConfig = (typeof program.noconfig === 'undefined') ? false : true;
-var outputCharset = (typeof program.outputCharset !== 'undefined' && charsets_1.output.includes(program.outputCharset.toUpperCase())) ? program.outputCharset.toUpperCase() : '';
 var pause = (typeof program.pause === 'undefined') ? false : true;
 var ppo = (typeof program.ppo === 'undefined') ? false : true;
-var priority = (program.priority >= 0 && program.priority <= 5) ? program.priority : null;
-var json = (typeof program.json === 'undefined') ? false : true;
 var safePPO = (typeof program.safePpo === 'undefined') ? false : true;
 var strict = (typeof program.strict === 'undefined') ? false : true;
-var verbose = (program.verbose >= 0 && program.verbose <= 4) ? program.verbose : null;
+var verbose = (program.verbose >= 0 && program.verbose <= 4) ? program.verbose : 2;
 var wine = (typeof program.wine === 'undefined') ? false : true;
+var outputCharset = (typeof program.outputCharset !== 'undefined' && charsets_1.output.includes(program.outputCharset.toUpperCase())) ? program.outputCharset.toUpperCase() : '';
+var priority = (program.priority >= 0 && program.priority <= 5) ? program.priority : 2;
 if (os_1.platform() === 'win32' || wine === true) {
     outputCharset = (typeof program.outputCharset !== 'undefined') ? program.outputCharset : '';
     priority = (typeof program.priority !== 'undefined') ? program.priority : '';
@@ -80,12 +91,18 @@ var options = {
     'outputCharset': outputCharset,
     'pause': pause,
     'ppo': ppo,
-    'safePPO': safePPO,
     'priority': priority,
+    'safePPO': safePPO,
     'strict': strict,
     'verbose': verbose,
     'wine': wine
 };
+if (program.preExecute) {
+    options['preExecute'] = program.preExecute;
+}
+if (program.postExecute) {
+    options['postExecute'] = program.postExecute;
+}
 (function () { return __awaiter(void 0, void 0, void 0, function () {
     var stdin;
     return __generator(this, function (_a) {
