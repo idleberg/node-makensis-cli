@@ -42,7 +42,7 @@ var getStdin = require("get-stdin");
 var commands_1 = require("./commands");
 var os_1 = require("os");
 var charsets_1 = require("./charsets");
-function parseCommands(value, dummyPrevious) {
+function parseCommands(value) {
     var trimmedValue = value.trim();
     try {
         return JSON.parse(trimmedValue);

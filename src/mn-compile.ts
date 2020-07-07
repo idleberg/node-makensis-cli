@@ -6,7 +6,7 @@ import { compile } from './commands';
 import { platform } from 'os';
 import { input as inputCharsets, output as outputCharsets } from './charsets';
 
-function parseCommands(value, dummyPrevious) {
+function parseCommands(value) {
   const trimmedValue = value.trim();
 
   try {

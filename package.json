@@ -26,17 +26,19 @@
     "yeoman-environment": "^2.10.3"
   },
   "devDependencies": {
-    "@types/node": "^14.0.19",
+    "@types/node": "^14.0.18",
+    "@typescript-eslint/eslint-plugin": "^3.6.0",
+    "@typescript-eslint/parser": "^3.6.0",
+    "eslint": "^7.4.0",
     "husky": "^4.2.5",
-    "tslint": "^6.1.2",
     "typescript": "^3.9.6"
   },
   "scripts": {
     "build": "tsc --pretty --project ./",
     "dev": "tsc --watch --pretty --project ./",
-    "lint": "tslint --project .",
-    "lint:fix": "tslint --fix --project .",
-    "prepublishOnly": "tslint --project . && npm run build",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
+    "prepublishOnly": "npm run lint && npm run build",
     "test": "npm run lint"
   },
   "husky": {

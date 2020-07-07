@@ -7,9 +7,10 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.output = exports.input = void 0;
 var language_data_1 = require("@nsis/language-data");
 var codePages = [];
-Object.keys(language_data_1.meta).forEach(function (key, index) {
+Object.keys(language_data_1.meta).forEach(function (key) {
     var codePage = language_data_1.meta[key].code_page;
     if (!isNaN(codePage) && !codePages.includes("CP" + codePage)) {
         codePages.push("CP" + codePage);

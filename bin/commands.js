@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.version = exports.scaffold = exports.nsisdir = exports.license = exports.hdrinfo = exports.compile = exports.cmdhelp = void 0;
 var makensis = require("makensis");
 var yeoman = require("yeoman-environment");
 // Exports

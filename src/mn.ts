@@ -8,7 +8,7 @@ import * as updateNotifier from 'update-notifier';
 updateNotifier({pkg}).notify();
 
 program
-  .version(require('../package.json').version)
+  .version(pkg['version'])
   .usage('[sub-command] [script] [options]')
   .description('CLI version of node-makensis')
   .command('hdrinfo', 'Print compilation flags').alias('flags')
