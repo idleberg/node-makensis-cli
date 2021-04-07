@@ -51,7 +51,8 @@
     "lint:ts": "eslint ./src --ignore-path .gitignore",
     "lint": "npm-run-all --parallel lint:*",
     "prepublishOnly": "npm run lint && npm run build",
-    "start": "tsc --watch --pretty --project ./"
+    "start": "tsc --watch --pretty --project ./",
+    "test": "npm run lint"
   },
   "husky": {
     "hooks": {
