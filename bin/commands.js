@@ -8,7 +8,7 @@ var cmdhelp = function (command, options) {
     if (command === void 0) { command = ''; }
     if (options === void 0) { options = {}; }
     Object.assign(options, { verbose: 0 });
-    makensis.cmdHelp(command, options)
+    makensis.commandHelp(command, options)
         .then(function (output) {
         log(output.stdout, options);
     }).catch(function (output) {
@@ -41,7 +41,7 @@ exports.compile = compile;
 var hdrinfo = function (options) {
     if (options === void 0) { options = {}; }
     Object.assign(options, { verbose: 0 });
-    makensis.hdrInfo(options)
+    makensis.headerInfo(options)
         .then(function (output) {
         log(output.stdout, options);
     }).catch(function (output) {
